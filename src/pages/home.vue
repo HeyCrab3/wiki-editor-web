@@ -8,7 +8,7 @@
       <div style="padding: 16px 20px;">
         <a-typography-title :heading="4">我的编辑内容 ({{ count }})  <a-button type="primary" @click="v1 = true">创建新内容</a-button></a-typography-title>
         <div style="margin-top: 20px;">
-          <a-card v-for="item in data" hoverable class="card"  :title="item['title']">
+          <a-card v-for="item in data" hoverable class="card2"  :title="item['title']">
               <span>{{item['content'].substring(0,47)}}...</span>
               <a-tooltip content="创建时间"><p><icon-history />{{ new Date(item['create_time'] * 1000).toLocaleString() }}</p></a-tooltip>
               <a-tooltip content="最后更新时间"><p><icon-edit />{{ new Date(item['update_time'] * 1000).toLocaleString() }}</p></a-tooltip>
@@ -197,10 +197,10 @@ async function loadData(){
   width: 100%;
   height: 100%;
 }
-.card:hover {
+.card2:hover {
   transform: translateY(-4px);
 }
-.card {
+.card2 {
   width: 400px;
   margin-right: 24px;
   margin-top: 10px;

@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
 import { execSync } from 'child_process';
 const _APP_INFO_ = {
 	// SHA 
@@ -10,7 +9,10 @@ const _APP_INFO_ = {
 	//HASH
 	GIT_HASH:execSync('git rev-parse HEAD').toString().trim(),
 	//最后提交 message
-	GIT_LAST_COMMIT_MESSAGE:execSync('git show -s --format=%s').toString().trim()
+	GIT_LAST_COMMIT_MESSAGE:execSync('git show -s --format=%s').toString().trim(),
+  GIT_BRANCH: execSync(`git rev-parse --abbrev-ref master@{upstream}`).toString().trim(),
+  APP_VERSION: '0.1.1',
+  BUILD_TIME: new Date().toLocaleString(),
 }
 
 // https://vitejs.dev/config/
@@ -26,6 +28,11 @@ export default defineConfig({
         target: 'http://127.0.0.1:50000/api',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '')
+      },
+      '/static': {
+        target: 'http://127.0.0.1:50000/static',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/static/, '')
       }
     }
   },
@@ -38,5 +45,5 @@ export default defineConfig({
       },
       javascriptEnabled: true
     }
-  }
+  },
 })

@@ -28,6 +28,11 @@ const routes = [
         component: HomeView
     },
     {
+        path: '/app',
+        name: 'download_app',
+        component: AppView
+    },
+    {
         path: '/login',
         name: 'login',
         component: LoginView

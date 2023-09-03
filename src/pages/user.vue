@@ -4,8 +4,8 @@
         <a-spin style="width: 100%; height: 100%" :size="32" :loading="loading" tip="正在获取消息中心数据">
         <div style="padding: 16px 20px;">
             <a-typography-title :heading="4">个人中心</a-typography-title>
-            <a-avatar :style="{ backgroundColor: '#00d0b6' }" :size="40">{{data['nickName']}}</a-avatar>
-            <a-typography-title style="display: inline; margin-left: 15px;" :heading="4">{{data['nickName']}}</a-typography-title>
+            <a-avatar :style="{ backgroundColor: '#00d0b6' }" :size="40">{{user.user_data['nickName']}}</a-avatar>
+            <a-typography-title style="display: inline; margin-left: 15px;" :heading="4">{{user.user_data['nickName']}}</a-typography-title>
             <div style="margin-top: 25px;">
                 <a-statistic title="创建的内容数" :value="edit_count" animation show-group-separator />
                 <a-statistic style="margin-left: 40px;" title="消息数" :value="msg_count" animation show-group-separator />
@@ -30,37 +30,29 @@
   </div>
 </template>
   
-  <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
-  import Axios from 'axios'
-  import { Modal, Message } from '@arco-design/web-vue'
-  import { useRouter } from 'vue-router'
-  import Menu from '../components/menu.vue'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import Axios from 'axios'
+import { Modal, Message } from '@arco-design/web-vue'
+import { useRouter } from 'vue-router'
+import Menu from '../components/menu.vue'
+import { useUserStore } from '../store/user'
   
-  const data = ref({})
-  const router = useRouter()
-  const loading = ref(true)
-  const edit_count = ref(0)
-  const msg_count = ref(0)
-  const msg = ref({})
+const user = useUserStore();
+onMounted(() => {
+    if (user.user_data.nickName == null){
+        user.fetchUserData();
+    }
+})
+
+const router = useRouter()
+const loading = ref(true)
+const edit_count = ref(0)
+const msg_count = ref(0)
+const msg = ref({})
   
-  onMounted(() => {
+onMounted(() => {
     document.title = "个人中心 | 仙舟通鉴 Wiki 内容管理器"
-    Axios('/api/v1/user/me')
-    .then(function(r){
-        if (r['data']['code'] != 0){
-            Message.error(r['data']['msg'])
-            router.push('/login')
-        }else{
-            data.value = r['data']['userdata']
-        }
-    })
-    .catch(function(e){
-        Modal.error({
-            title: '请求错误',
-            content: e
-        })
-    })
     Axios('/api/v1/content/count')
     .then(function(r){ 
         if (r['data']['code'] != 0){
@@ -90,11 +82,11 @@
         }
     })
     .catch(function(e){loading.value = false;Modal.error({title: '请求错误',content: e})})
-  })
+})
   
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   
-  </style>
+</style>
     

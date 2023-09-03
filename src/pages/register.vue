@@ -2,10 +2,6 @@
 <template>
     <div id="b">
         <div class="login">
-            <div class="side_panel">
-                <h2>✨ 欢迎登录仙舟通鉴 Wiki 内容编辑器</h2>
-                <p>在这里提交你的内容，并可视化看到审核进度</p>
-            </div>
             <div class="container">
                 <h2>注册</h2>
                 <a-form
@@ -65,7 +61,7 @@
                     </a-form-item>
 
                     <a-form-item>
-                    <a-button :loading="isLoading" :disabled="disabled" variant="solid" @click="onFinish">
+                    <a-button type="primary" style="width: 100%" :loading="isLoading" :disabled="disabled" variant="solid" @click="onFinish">
                         注册
                     </a-button>
                     </a-form-item>
@@ -79,15 +75,14 @@
 
 <style scoped>
 .login{
-    width: 70%;
-    height: 60%;
-    border-radius: 10px;
-    background: #000000b6;
+    width: 500px;
+    height: 100%;
+    border-radius: 10px 0px 0px 10px;
+    /* background: #000000b6; */
+    background: #FFFFFFb6;
     backdrop-filter: blur(25px);
-    margin: auto;
-    position: relative;
-    top: 20%;
-    color: #FFF
+    /* color: #FFF; */
+    float: right;
 }
 .side_panel, .container{
     display: inline-block;
@@ -95,15 +90,8 @@
     padding: 24px 18px;
     border-radius: 10px;
 }
-.side_panel{
-    width: 45%;
-    background: url(/light-bg2.png) no-repeat;
-    background-size: 100% 100%;
-    float: left
-}
 .container{
-    float: right;
-    width: 45%
+    width: 90%
 }
 #b{
     background: url(https://www.dmoe.cc/random.php) no-repeat;
@@ -126,7 +114,7 @@ const CaptchaObj = ref(null)
 
 const push = () => { router.push('/login') }
 
-onMounted(() => { document.title = "登录 | 仙舟通鉴 Wiki 内容管理器" })
+onMounted(() => { document.title = "注册 | 仙舟通鉴 Wiki 内容管理器" })
 
 Axios('/api/v1/heartbeat')
 .then(function(Response){

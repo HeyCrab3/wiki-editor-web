@@ -1,10 +1,6 @@
 <template>
     <div style="background: url(https://www.dmoe.cc/random.php) no-repeat; background-size: cover; width: 100%; height: 100%">
         <div class="login">
-            <div class="side_panel">
-                <h2>✨ 欢迎登录仙舟通鉴 Wiki 内容编辑器</h2>
-                <p>在这里提交你的内容，并可视化看到审核进度</p>
-            </div>
             <div class="container">
                 <h2>欢迎登录</h2>
                 <a-form
@@ -40,11 +36,13 @@
                     </a-form-item>
 
                     <a-form-item>
-                    <a-button :loading="isLoading" :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
+                    <a-button style="width: 100%" :loading="isLoading" :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
                         登录
                     </a-button>
-                    或者
-                    <a-link href="/register">现在注册</a-link>
+                    </a-form-item>
+                    <a-form-item>
+                        <a-link href="/register">现在注册</a-link>
+                        <a-link href="/">返回主页</a-link>
                     </a-form-item>
                 </a-form>
             </div>
@@ -54,15 +52,14 @@
 
 <style scoped>
 .login{
-    width: 70%;
-    height: 60%;
-    border-radius: 10px;
-    background: #000000b6;
+    width: 500px;
+    height: 100%;
+    border-radius: 10px 0px 0px 10px;
+    /* background: #000000b6; */
+    background: #FFFFFFb6;
     backdrop-filter: blur(25px);
-    margin: auto;
-    position: relative;
-    top: 20%;
-    color: #FFF
+    /* color: #FFF; */
+    float: right;
 }
 .side_panel, .container{
     display: inline-block;
@@ -70,15 +67,8 @@
     padding: 24px 18px;
     border-radius: 10px;
 }
-.side_panel{
-    width: 45%;
-    background: url(/light-bg2.png) no-repeat;
-    background-size: 100% 100%;
-    float: left
-}
 .container{
-    float: right;
-    width: 45%
+    width: 90%
 }
 
 </style>
@@ -137,7 +127,11 @@ const onFinish = (values: any) => {
             Message.error(Response['data']['msg'])
         }else{
             Message.success('登陆成功')
-            router.push('/')
+            if (router.currentRoute.value.query['redirect_to'] != null){
+                router.push(router.currentRoute.value.query['redirect_to'])
+            }else{
+                router.push('/')
+            }
         }
     })
      .catch(function(error){

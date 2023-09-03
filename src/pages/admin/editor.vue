@@ -23,7 +23,7 @@
                     <template v-for="item in btnList">
                         <a-button v-if="item['position'].indexOf(0) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
                     </template>
-                    <a-alert type="warning">不提供图片上传功能，如需使用图片请前往<a-link href="https://imgse.com/" status="danger" target="_blank">路过图床</a-link>，上传完成后将图片URL复制到对应区域</a-alert>
+                    <a-alert type="info">如需使用图片上传功能，请使用顶部菜单栏图片图标中的上传本地图片或直接拖拽图片进编辑器</a-alert>
                 </a-tab-pane>
                 <a-tab-pane key="2">
                     <template #title style="text-align: center;"><icon-h1/><br/>段落</template>
@@ -48,7 +48,7 @@
                     <template v-for="item in btnList">
                         <a-button v-if="item['position'].indexOf(4) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
                     </template>
-                    <a-alert type="warning">不提供图片上传功能，如需使用图片请前往<a-link href="https://imgse.com/" status="danger" target="_blank">路过图床</a-link>，上传完成后将图片URL复制到对应区域</a-alert>
+                    <a-alert type="info">如需使用图片上传功能，请使用顶部菜单栏图片图标中的上传本地图片或直接拖拽图片进编辑器</a-alert>
                 </a-tab-pane>
                 <a-tab-pane key="6">
                     <template #title style="text-align: center;"><icon-more/><br/>其他</template>
@@ -61,7 +61,7 @@
         </a-layout-sider>
         <a-layout-content>
             <a-spin :loading="loading" style="width: 100%; height: 100%">
-                <v-md-editor @blur="save" @save="save" v-model="content"></v-md-editor>
+                <v-md-editor :disabled-menus="[]" @upload-image="handleUploadImage" @blur="save" @save="save" v-model="content"></v-md-editor>
             </a-spin>
         </a-layout-content>
       </a-layout>
@@ -341,6 +341,37 @@ const clickEvent = (icon_name: string) => {
         }
         else{
             console.log('nope')
+        }
+    }
+}
+
+const handleUploadImage = (event: any, insertImage: Function, files: Array<File>) => {
+    console.log(files)
+    for (var i = 0; i < files.length; i++){
+        if (files[i].size > 50000000){
+            Message.error(`上传图片 ${files[0]['name']} 时发生错误 图片大小过大，需在 50MB 以内`)    
+        }else{
+            const formData = new FormData();
+            formData.append('file', files[i]);
+            Axios({
+                url: '/api/v1/content/uploadImage',
+                method: 'POST',
+                data: formData
+            })
+            .then(function(r){
+                if (r.data['code'] != 0){
+                    Message.error(`上传图片 ${files[0]['name']} 时发生错误 ${r['data']['msg']}`)    
+                }else{
+                    console.log(r['data']['url'])
+                    insertImage({
+                        url: r['data']['url'],
+                        desc: files[0]['name']
+                    })
+                }
+            })
+            .catch(function(e){
+                Message.error(`上传图片 ${files[0]['name']} 时发生错误 ${e.msg}`)
+            })
         }
     }
 }
