@@ -10,12 +10,13 @@ export const useUserStore = defineStore('user_info', () => {
     const user_data = ref({
         'userName': undefined,
         'nickName': undefined,
+        'phone': undefined,
         'perm': undefined
     })
 
     const fetchUserData = () => {
         return Axios({
-          url: '/api/v1/user/me'
+          url: '/api/v2/user/me'
         })
         .then(function(r){
           if (r['data']['code'] != 0){

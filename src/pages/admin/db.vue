@@ -38,11 +38,9 @@ const init = (value: any) => {
         editor.value = monaco.editor.create(document.getElementById('monaco-editor'), {
               value: JSON.stringify(value),
               language: 'json',
-              theme: 'vs-dark',
               readOnly: true,
               automaticLayout: true,
-              fontSize: 15,
-              minimap: false
+              fontSize: 15
         })
 }
 
@@ -52,7 +50,7 @@ const getDB = () => {
         }else{
             document.getElementById('monaco-editor').innerHTML = ""
             Axios({
-                url: '/api/v1/content_manage/zone/9999/getDatabaseInfo?db=' + dbname.value
+                url: '/api/v2/content_manage/zone/9999/getDatabaseInfo?db=' + dbname.value
             })
             .then(function(Response){
                 var isPassed = Response['data']['code']

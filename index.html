@@ -9,26 +9,26 @@
       html, body, #app{
         height: 100%
       }
-      .arco-tabs-tab-title{
-          color: #dfdfdf;
-          text-align: center;
-      }
-      .arco-tabs-tab-active .arco-tabs-tab-title{
-          color: #FFF;
-      }
       @font-face {
         font-family: sr;
         src: url(/zh-cn.ttf);
+      }
+      @font-face {
+        font-family: HYXuanSong45S;
+        src: url(/HYXuanSong45S.ttf);
       }
       html, body, #app{
         font-family: 'sr', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         height: 100%
       }
+      .arco-modal-mask{
+        backdrop-filter: blur(10px);
+      }
     </style>
   </head>
-  <body>
-    <div id="app"></div>
+  <body style="font-family: 'sr', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <div id="app" style="font-family: 'sr', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"></div>
     <script type="module" src="/src/main.ts"></script>
     <script src="https://static.geetest.com/v4/gt4.js"></script>
   </body>

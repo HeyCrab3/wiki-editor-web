@@ -25,12 +25,12 @@ export default defineConfig({
     port: 3555,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:50000/api',
+        target: 'https://fe-dev.crabapi.cn:50000/api',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '')
       },
       '/static': {
-        target: 'http://127.0.0.1:50000/static',
+        target: 'https://fe-dev.crabapi.cn:50000/static',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/static/, '')
       }

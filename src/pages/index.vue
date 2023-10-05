@@ -2,14 +2,42 @@
     <a-layout id="layout" style="height: 100%;">
       <a-layout-header><home_menu style="position: fixed"/></a-layout-header>
       <a-layout-content>
-        <div class="hero" :style="gradientStyle">
-            <h2>随时随地</h2>
-            <h2>轻松编辑</h2>
-            <p>轻松、愉悦地编辑 Wiki 中的任何内容并且无需掌握 Markdown 语法知识</p>
-            <div v-if="user.user_data.nickName == null"><a-button size="large" type="primary" href="register"><EditOutlined/>立刻开始</a-button></div>
-            <div v-else><a-button size="large" type="primary" href="home"><ArrowRightOutlined/>我的工作台</a-button></div>
-            <div v-if="user.user_data.nickName == null"><a-button size="large" href="login"><ArrowRightOutlined/>已经有账号了？登录</a-button></div>
-        </div>
+        <a-carousel
+            :style="{
+            width: '100%',
+            height: '80%',
+            userSelect: 'none'
+            }"
+            :default-current="1"
+            auto-play
+        >
+            <a-carousel-item>
+                <div class="hero" :style="gradientStyle">
+                    <h2>随时随地</h2>
+                    <h2>轻松编辑</h2>
+                    <p>轻松、愉悦地编辑 Wiki 中的任何内容并且无需掌握 Markdown 语法知识</p>
+                    <div v-if="user.user_data.nickName == null"><a-button size="large" type="primary" href="register"><EditOutlined/>立刻开始</a-button></div>
+                    <div v-else><a-button size="large" type="primary" href="home_v2"><ArrowRightOutlined/>我的工作台</a-button></div>
+                    <div v-if="user.user_data.nickName == null"><a-button size="large" href="login"><ArrowRightOutlined/>已经有账号了？登录</a-button></div>
+                </div>
+            </a-carousel-item>
+            <a-carousel-item>
+                <div :style="defaultStyle" class="hero" style="background: url(https://t.mwm.moe/pc/) no-repeat; background-size: cover; color: #FFF; text-shadow: 0px 0px 6px #898989">
+                    <h2>v2版本上线</h2>
+                    <p>全新页面，支持分享功能，支持创建文件夹，用户系统大翻新以及更多小改动</p>
+                    <p>当然 我们依然愿意倾听您的反馈</p>
+                    <div><a-button size="large" type="primary" href="home_v2"><ArrowRightOutlined/>走你！</a-button></div>
+                </div>
+            </a-carousel-item>
+            <a-carousel-item>
+                <div :style="defaultStyle" class="hero" style="background: url(https://t.mwm.moe/fj/) no-repeat; background-size: cover; color: #FFF; text-shadow: 0px 0px 6px #898989">
+                    <h2>加入官方 QQ 频道</h2>
+                    <p>我们的官方QQ频道：仙舟通鉴</p>
+                    <p>来这里结识更多志同道合的米友，和其他编辑一起协作，反馈平台问题</p>
+                    <div><a-button size="large" type="primary" href="https://pd.qq.com/s/9p6w252k1" target="_blank"><ArrowRightOutlined/>走你！</a-button></div>
+                </div>
+            </a-carousel-item>
+        </a-carousel>
         <div style="margin-top: 10px; padding: 20px; text-align: center;">
             <section>
                 <h1>为什么选择我们</h1>
@@ -98,8 +126,17 @@ import { ArrowRightOutlined, EditOutlined, CheckCircleOutlined, PhoneOutlined, R
 import { ref } from 'vue';
 let gradientAngle = ref(140);
 
+const defaultStyle = ref<CSSProperties>({
+    height: "100%",
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    borderRadius: '0px 0px 10px 10px',
+    padding: '20px',
+})
+
 const gradientStyle = ref<CSSProperties>({
-    height: '60%',
+    height: '100%',
     background: `linear-gradient(${gradientAngle.value}deg, #acfcff, #8dc8ff)`,
     display: 'flex',
     justifyContent: 'center',

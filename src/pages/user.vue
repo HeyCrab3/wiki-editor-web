@@ -53,7 +53,7 @@ const msg = ref({})
   
 onMounted(() => {
     document.title = "个人中心 | 仙舟通鉴 Wiki 内容管理器"
-    Axios('/api/v1/content/count')
+    Axios('/api/v2/content/count')
     .then(function(r){ 
         if (r['data']['code'] != 0){
             Message.error(r['data']['msg'])
@@ -62,7 +62,7 @@ onMounted(() => {
         }
     })
     .catch(function(e){loading.value = false;Modal.error({title: '请求错误',content: e})})
-    Axios('/api/v1/message/count')
+    Axios('/api/v2/message/count')
     .then(function(r){ 
         if (r['data']['code'] != 0){
             Message.error(r['data']['msg'])
@@ -72,7 +72,7 @@ onMounted(() => {
         }
     })
     .catch(function(e){loading.value = false;Modal.error({title: '请求错误',content: e})})
-    Axios('/api/v1/message/list')
+    Axios('/api/v2/message/list')
     .then(function(r){ 
         if (r['data']['code'] != 0){
             Message.error(r['data']['msg'])

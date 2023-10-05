@@ -1,6 +1,6 @@
 <template>
     <div class="title" :style="titleStyle">
-        <a-link class="b" @click="go" style="color: #000">仙舟通鉴 Wiki 内容编辑器</a-link>
+        <a-link class="b" @click="go" :style="{ color: color, 'text-shadow': '0px 0px 6px #898989' }">仙舟通鉴 Wiki 内容编辑器</a-link>
         <div style="float: right; margin-right: 30px; position: relative; bottom: 6px" v-if="user.user_data.nickName != null">
             {{ user.user_data.nickName }}
             <a-button type="text" href="api/v1/logout">退出登录</a-button>
@@ -37,9 +37,10 @@ const user = useUserStore();
 const router = useRouter();
 
 const go = () => { router.push('/') }
-const dashboard = () => { router.push('/home') }
+const dashboard = () => { router.push('/home_v2') }
 const download = () => { router.push('/app') }
 
+const color = ref('#FFF')
 const titleStyle = ref({
   height: '24px',
   padding: '15px',
@@ -48,8 +49,8 @@ const titleStyle = ref({
   lineHeight: '24px',
   width: '100%',
   zIndex: 998,
-  backdropFilter: 'blur(10px)',
-  transition: '0.5s'
+  backdropFilter: null,
+  transition: '0.5s',
 });
 
 onMounted(() => {
@@ -61,8 +62,12 @@ onMounted(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if (scrollTop - ( 0.25 * document.body.clientHeight) <= 0) {
       titleStyle.value.background = '#ffffff00';
+      titleStyle.value.backdropFilter = null
+      color.value = "#FFF"
     } else {
       titleStyle.value.background = '#FFFFFFBE';
+      titleStyle.value.backdropFilter = "blur(10px)"
+      color.value = "#000"
     }
   });
 });

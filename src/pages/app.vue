@@ -4,7 +4,7 @@
       <a-layout-content>
         <div style="padding: 24px; text-align: center; margin-top: 30px; height: 100%;">
             <h1>下载客户端</h1>
-            <span>我们提供 Windows, Linux, MacOS 三个平台的客户端。<a-tooltip content="手机端屏幕太小，不适合进行编辑操作，且无法进行自定义组件的渲染，故不支持手机端，编辑器也非常不推荐手机端用户使用，会遇到各种奇怪的bug"><a-link>为什么没有手机端？</a-link></a-tooltip></span>
+            <span>我们提供 Windows, Linux, MacOS 三个平台的客户端。<a-tooltip content="coming s∞n™"><a-link>手机端在哪？</a-link></a-tooltip></span>
             <div class="card-container" style="margin-top: 30px;">
                 <div class="card">
                     <div class="icon">
