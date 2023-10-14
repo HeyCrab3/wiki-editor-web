@@ -156,6 +156,7 @@ import Axios from 'axios'
 import { routerKey, useRouter } from 'vue-router';
 import { requireQrCode, requireQrStatus } from '../js/require_qr'
 import QRCode from 'qrcodejs2-fix'
+import { useUserStore } from '../store/user';
 
 const isLoading = ref(false)
 const router = useRouter()
@@ -163,6 +164,7 @@ const CaptchaObj = ref(null)
 const data = ref({})
 const a = ref(null)
 
+const user = useUserStore()
 // getQr
 const qrloading = ref(true)
 const qrText = ref('二维码正在获取')
@@ -211,6 +213,7 @@ const getQr = () => {
                             if (r['data']['code'] != 0){
                                 Message.error('扫码登录失败：' + r['data']['msg'])
                             }else{
+                                user.fetchUserData()
                                 Message.success('登陆成功')
                                 if (router.currentRoute.value.query['redirect_to'] != null){
                                     router.push(router.currentRoute.value.query['redirect_to'])
@@ -360,6 +363,7 @@ const onFinish = (values: any) => {
         if (Response['data']['code'] != 0){
             Message.error(Response['data']['msg'])
         }else{
+            user.fetchUserData()
             Message.success('登陆成功')
             if (router.currentRoute.value.query['redirect_to'] != null){
                 router.push(router.currentRoute.value.query['redirect_to'])
@@ -395,6 +399,7 @@ const onFinish2 = (values: any) => {
         if (Response['data']['code'] != 0){
             Message.error(Response['data']['msg'])
         }else{
+            user.fetchUserData()
             Message.success('登陆成功')
             if (router.currentRoute.value.query['redirect_to'] != null){
                 router.push(router.currentRoute.value.query['redirect_to'])

@@ -12,6 +12,9 @@ import EditorView from '../pages/editor.vue'
 import AdminView from '../pages/admin.vue'
 import LoginV1View from '../pages/login_v1.vue'
 
+// middleware
+import OAuthCallback from '../pages/third_party/oauth.vue'
+
 import AdminNextView from '../pages/admin_v2.vue'
 import HomeNextView from '../pages/home_next.vue'
 import EditorNextView from '../pages/editor_next.vue'
@@ -155,6 +158,11 @@ const routes = [
         path: '/admin_v2/editor/:id',
         name: 'admin v2 editor',
         component: AdminEditorV2View
+    },
+    {
+        path: '/oauth_callback',
+        name: 'OAuth Callback',
+        component: OAuthCallback
     },
     {
         path: '/:catchAll(.*)',
