@@ -1,12 +1,12 @@
 <template>
-    <a-typography-title :heading="4">内容管理</a-typography-title>
+    <arco-typography-title :heading="4">内容管理</arco-typography-title>
         <div style="margin-top: 25px;">
-            <a-statistic title="CPU 利用率 (%)" :value="system_data['cpu']" animation show-group-separator />
-            <a-statistic style="margin-left: 40px;" title="内存利用率 (%)" :value="system_data['ram']" animation show-group-separator />
-            <a-statistic style="margin-left: 40px;" title="程序PID" :value="system_data['pid']" animation show-group-separator />
-            <a-statistic style="margin-left: 40px;" title="内容总数" :value="platform_data[0]" animation show-group-separator />
-            <a-statistic style="margin-left: 40px;" title="用户数" :value="platform_data[1]" animation show-group-separator />
-            <a-statistic style="margin-left: 40px;" title="消息总数" :value="platform_data[2]" animation show-group-separator />
+            <arco-statistic title="CPU 利用率 (%)" :value="system_data['cpu']" animation show-group-separator />
+            <arco-statistic style="margin-left: 40px;" title="内存利用率 (%)" :value="system_data['ram']" animation show-group-separator />
+            <arco-statistic style="margin-left: 40px;" title="程序PID" :value="system_data['pid']" animation show-group-separator />
+            <arco-statistic style="margin-left: 40px;" title="内容总数" :value="platform_data[0]" animation show-group-separator />
+            <arco-statistic style="margin-left: 40px;" title="用户数" :value="platform_data[1]" animation show-group-separator />
+            <arco-statistic style="margin-left: 40px;" title="消息总数" :value="platform_data[2]" animation show-group-separator />
         </div>
 </template>
 
@@ -23,7 +23,7 @@ const system_data = ref({})
 const platform_data = ref([])
 
 onMounted(() => {
-    document.title = "内容管理 | 仙舟通鉴 Wiki 内容管理器"
+    document.title = "内容管理 | 仙舟通鉴编辑器"
     Axios('/api/v1/content_manage/zone/1/getSystemInfo')
     .then(function(r){
         if (r['data']['code'] != 0){

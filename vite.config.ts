@@ -1,6 +1,12 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { execSync } from 'child_process';
+import { vitePluginForArco } from '@arco-plugins/vite-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite';
+import { ArcoResolver } from 'unplugin-vue-components/resolvers';
+import path from 'path';  
+
 const _APP_INFO_ = {
 	// SHA 
 	GIT_SHA:execSync('git rev-parse --short HEAD').toString().trim(),
@@ -20,13 +26,26 @@ export default defineConfig({
   define: {
     _APP_INFO_: JSON.stringify(_APP_INFO_)
   },
-  plugins: [vue()],
+  plugins: [vue(), vitePluginForArco({
+    componentPrefix: "arco"
+  }),AutoImport({
+    resolvers: [ArcoResolver()],
+  }),
+  Components({
+    resolvers: [
+      ArcoResolver({
+        sideEffect: true
+      })
+    ]
+  })],
   server: {
     port: 3555,
     proxy: {
       '/api': {
         target: 'https://fe-dev.crabapi.cn:50000/api',
         changeOrigin: true,
+        ssl: false,
+        secure: false,
         rewrite: path => path.replace(/^\/api/, '')
       },
       '/static': {
@@ -36,14 +55,19 @@ export default defineConfig({
       }
     }
   },
-  css: {
-    preprocessorOptions: {
-      less: {
-        modifyVars: {
-          'arcoblue-6': '#FFF'
-        }
-      },
-      javascriptEnabled: true
+  resolve: {
+    alias: {
+      'ant': 'ant-design-vue',
     }
   },
+  css: {
+    preprocessorOptions: {
+        less: {
+          modifyVars: {
+              'arcoblue-6': '#66CCFF',
+          },
+          javascriptEnabled: true,
+      }
+    },
+},
 })

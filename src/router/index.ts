@@ -3,23 +3,19 @@ import FourOFour from '../pages/404.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 import IndexView from '../pages/index.vue'
-import HomeView from '../pages/home.vue'
 import AppView from '../pages/app.vue'
-import LoginView from '../pages/login.vue'
-import RegisterView from '../pages/register.vue'
-import UserView from '../pages/user.vue'
-import EditorView from '../pages/editor.vue'
-import AdminView from '../pages/admin.vue'
-import LoginV1View from '../pages/login_v1.vue'
 
 // middleware
 import OAuthCallback from '../pages/third_party/oauth.vue'
+import ThirdPartyCallback from '../pages/third_party/login.vue'
 
 import AdminNextView from '../pages/admin_v2.vue'
 import HomeNextView from '../pages/home_next.vue'
 import EditorNextView from '../pages/editor_next.vue'
 import UserNextView from '../pages/user_next.vue'
 import ShareView from '../pages/share.vue'
+import EditorV3View from '../pages/editor_v3.vue'
+
 import AdminHomeV2View from '../pages/admin_v2/home.vue'
 import AdminViewV2View from '../pages/admin_v2/view.vue'
 import AdminDownloadV2View from '../pages/admin_v2/download.vue'
@@ -27,23 +23,19 @@ import AdminDBV2View from '../pages/admin_v2/db.vue'
 import AdminUserV2View from '../pages/admin_v2/user.vue'
 import AdminEditorV2View from '../pages/admin_v2/editor.vue'
 
-import AdminHomeView from '../pages/admin/home.vue'
-import AdminViewView from '../pages/admin/view.vue'
-import AdminDownloadView from '../pages/admin/download.vue'
-import AdminDBView from '../pages/admin/db.vue'
-import AdminUserView from '../pages/admin/user.vue'
-import AdminEditorView from '../pages/admin/editor.vue'
+// 分享
+import Share1View from '../pages/share/share.vue'
+
+// 新的登录页面
+import LoginV3View from '../pages/login/login_v3.vue'
+import RegisterV3View from '../pages/login/register_v3.vue'
+import UniLoginPortal from '../pages/login/unilogin_portal.vue'
 
 const routes = [
     {
         path: '/',
         name: 'index',
         component: IndexView
-    },
-    {
-        path: '/home',
-        name: 'home',
-        component: HomeView
     },
     {
         path: '/app',
@@ -53,22 +45,27 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: LoginView
+        redirect: { name: 'loginV3' }
     },
     {
-        path: '/login_v1',
-        name: 'login_v1',
-        component: LoginV1View
+        path: '/uniLogin',
+        name: 'uniLogin',
+        component: UniLoginPortal
     },
     {
         path: '/register',
         name: 'register',
-        component: RegisterView
+        redirect: { name: 'registerV3' }
     },
     {
-        path: '/user',
-        name: 'user',
-        component: UserView
+        path: '/login_v3',
+        name: 'loginV3',
+        component: LoginV3View
+    },
+    {
+        path: '/register_v3',
+        name: 'registerV3',
+        component: RegisterV3View
     },
     {
         path: '/home_v2',
@@ -81,8 +78,8 @@ const routes = [
         component: UserNextView
     },
     {
-        path: '/share',
-        name: 'share',
+        path: '/myshare',
+        name: 'myShare',
         component: ShareView
     },
     {
@@ -91,36 +88,9 @@ const routes = [
         component: EditorNextView
     },
     {
-        path: '/editor/:id',
-        name: 'editor',
-        component: EditorView
-    },
-    {
-        path: '/admin',
-        name: 'admin',
-        component: AdminView,
-        children: [
-            {
-                path: 'home',
-                component: AdminHomeView
-            },
-            {
-                path: 'view',
-                component: AdminViewView
-            },
-            {
-                path: 'user',
-                component: AdminUserView
-            },
-            {
-                path: 'db',
-                component: AdminDBView
-            },
-            {
-                path: 'download',
-                component: AdminDownloadView
-            }
-        ]
+        path: '/editor_v3/:id',
+        name: 'editor v3',
+        component: EditorV3View
     },
     {
         path: '/admin_v2',
@@ -150,11 +120,6 @@ const routes = [
         ]
     },
     {
-        path: '/admin/editor/:id',
-        name: 'admin editor',
-        component: AdminEditorView
-    },
-    {
         path: '/admin_v2/editor/:id',
         name: 'admin v2 editor',
         component: AdminEditorV2View
@@ -165,9 +130,19 @@ const routes = [
         component: OAuthCallback
     },
     {
+        path: '/login_callback',
+        name: 'Login Callback',
+        component: ThirdPartyCallback
+    },
+    {
         path: '/:catchAll(.*)',
         name: '404',
         component: FourOFour
+    },
+    {
+        path: '/share/:id',
+        name: 'share',
+        component: Share1View
     }
 ]
   

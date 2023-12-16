@@ -1,10 +1,10 @@
 <template>
-    <a-layout id="layout" style="height: 100%;">
-      <a-layout-header><home_menu style="position: fixed"/></a-layout-header>
-      <a-layout-content>
+    <arco-layout id="layout" style="height: 100%;">
+      <arco-layout-header><home_menu style="position: fixed"/></arco-layout-header>
+      <arco-layout-content>
         <div style="padding: 24px; text-align: center; margin-top: 30px; height: 100%;">
             <h1>下载客户端</h1>
-            <span>我们提供 Windows, Linux, MacOS 三个平台的客户端。<a-tooltip content="coming s∞n™"><a-link>手机端在哪？</a-link></a-tooltip></span>
+            <span>我们提供 Windows, Linux, MacOS 三个平台的客户端。<arco-tooltip content="coming s∞n™"><arco-link>手机端在哪？</arco-link></arco-tooltip></span>
             <div class="card-container" style="margin-top: 30px;">
                 <div class="card">
                     <div class="icon">
@@ -13,7 +13,7 @@
                     <h2>Windows 客户端</h2>
                     <p>版本 --</p>
                     <p>更新于 --</p>
-                    <a-tooltip content="敬请期待"><a-button disabled type="primary" size="large" shape="round" style="width: 90%"><DownloadOutlined/>下载</a-button></a-tooltip>
+                    <arco-tooltip content="敬请期待"><arco-button disabled type="primary" size="large" shape="round" style="width: 90%"><DownloadOutlined/>下载</arco-button></arco-tooltip>
                 </div>
                 <div class="card">
                     <div class="icon">
@@ -22,7 +22,7 @@
                     <h2>MacOS 客户端</h2>
                     <p>版本 --</p>
                     <p>更新于 --</p>
-                    <a-tooltip content="敬请期待"><a-button disabled type="primary" size="large" shape="round" style="width: 90%"><DownloadOutlined/>下载</a-button></a-tooltip>
+                    <arco-tooltip content="敬请期待"><arco-button disabled type="primary" size="large" shape="round" style="width: 90%"><DownloadOutlined/>下载</arco-button></arco-tooltip>
                 </div>
                 <div class="card">
                     <div class="icon">
@@ -31,39 +31,15 @@
                     <h2>Linux 客户端</h2>
                     <p>版本 --</p>
                     <p>更新于 --</p>
-                    <a-tooltip content="敬请期待"><a-button disabled type="primary" size="large" shape="round" style="width: 90%"><DownloadOutlined/>Ubuntu / Debian (.deb)</a-button></a-tooltip>
-                    <a-tooltip content="敬请期待"><a-button disabled type="primary" size="large" shape="round" style="width: 90%; margin-top: 10px;"><DownloadOutlined/>RedHat / CentOS (.rpm)</a-button></a-tooltip>
+                    <arco-tooltip content="敬请期待"><arco-button disabled type="primary" size="large" shape="round" style="width: 90%"><DownloadOutlined/>Ubuntu / Debian (.deb)</arco-button></arco-tooltip>
+                    <arco-tooltip content="敬请期待"><arco-button disabled type="primary" size="large" shape="round" style="width: 90%; margin-top: 10px;"><DownloadOutlined/>RedHat / CentOS (.rpm)</arco-button></arco-tooltip>
                 </div>
             </div>
         </div>
-        <a-layout-footer style="height: 100px; padding: 15px; background: #f5f5f5">
-            <div style="float: left; position: relative; bottom: 6px">
-                <h2>仙舟通鉴</h2>
-                <small>©{{ new Date().getFullYear() }} Crab Studio. All Rights Reserved.</small><br/>
-                <small>本站所有内容均以 CC-BY-NC-NA 协议授权。</small>
-            </div>
-            <!-- 这里需要注意最右边的导航栏是第一个div -->
-            <div style="float: right; margin-left: 20px; text-align: right;">
-                <h3 style="margin: 0; margin-bottom: 5px;">我们的服务</h3>
-                <a-link style="display: block;" target="_blank" href="https://seelevollerei.online"><RightOutlined style="margin-right: 10px;"/>仙舟通鉴</a-link>
-                <a-link style="display: block;" target="_blank" href="https://editor.seelevollerei.online"><RightOutlined style="margin-right: 10px;"/>Wiki 内容编辑器</a-link>
-                <a-link style="display: block;" target="_blank" href="https://help.seelevollerei.online"><RightOutlined style="margin-right: 10px;"/>帮助中心</a-link>
-            </div>
-            <div style="float: right; margin-left: 20px; text-align: right">
-                <h3 style="margin: 0; margin-bottom: 5px;">关注官方社媒</h3>
-                <a-link style="display: block;" target="_blank" href="https://space.bilibili.com/3537119408556068?spm_id_from=333.999.0.0"><RightOutlined style="margin-right: 10px;"/>哔哩哔哩</a-link>
-                <a-link style="display: block;" target="_blank" href="https://pd.qq.com/s/9p6w252k1"><RightOutlined style="margin-right: 10px;"/>QQ频道</a-link>
-            </div>
-            <div style="float: right; margin-left: 20px; text-align: right">
-                <h3 style="margin: 0; margin-bottom: 5px;">联系我们</h3>
-                <a-link href="mailto:heycrab@petalmail.com"><svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#080341"/>
-</svg>heycrab@petalmail.com</a-link>
-            </div>
-        </a-layout-footer>
-      </a-layout-content>      
-    </a-layout>
-    <a-back-top target-container="#layout" :style="{position:'absolute'}" />
+        <Footer/>
+      </arco-layout-content>      
+    </arco-layout>
+    <arco-back-top target-container="#layout" :style="{position:'absolute'}" />
 </template>
 
 <style>
@@ -108,8 +84,9 @@ import { onMounted } from 'vue';
 import home_menu from '../components/home_menu.vue'
 import { useUserStore } from '../store/user'
 import { RightOutlined, DownloadOutlined } from '@ant-design/icons-vue';
+import Footer from '../components/footer.vue';
 const user = useUserStore();
 onMounted(() => {
-    document.title = "下载客户端 | 仙舟通鉴 Wiki 内容编辑器"
+    document.title = "下载客户端 | 仙舟通鉴编辑器"
 })
 </script>

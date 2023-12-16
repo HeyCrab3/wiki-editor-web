@@ -1,8 +1,8 @@
 <template>
-    <a-layout id="layout" style="height: 100%;">
-      <a-layout-header><home_menu style="position: fixed"/></a-layout-header>
-      <a-layout-content>
-        <a-carousel
+    <arco-layout id="layout" style="height: 100%;">
+      <arco-layout-header><home_menu style="position: fixed"/></arco-layout-header>
+      <arco-layout-content>
+        <arco-carousel
             :style="{
             width: '100%',
             height: '80%',
@@ -11,33 +11,51 @@
             :default-current="1"
             auto-play
         >
-            <a-carousel-item>
+            <arco-carousel-item>
                 <div class="hero" :style="gradientStyle">
                     <h2>随时随地</h2>
                     <h2>轻松编辑</h2>
                     <p>轻松、愉悦地编辑 Wiki 中的任何内容并且无需掌握 Markdown 语法知识</p>
-                    <div v-if="user.user_data.nickName == null"><a-button size="large" type="primary" href="register"><EditOutlined/>立刻开始</a-button></div>
-                    <div v-else><a-button size="large" type="primary" href="home_v2"><ArrowRightOutlined/>我的工作台</a-button></div>
-                    <div v-if="user.user_data.nickName == null"><a-button size="large" href="login"><ArrowRightOutlined/>已经有账号了？登录</a-button></div>
+                    <div v-if="user.user_data.nickName == null"><arco-button size="large" type="primary" href="register_v3"><EditOutlined/>立刻开始</arco-button></div>
+                    <div v-else><arco-button size="large" type="primary" href="home_v2"><ArrowRightOutlined/>我的工作台</arco-button></div>
+                    <div v-if="user.user_data.nickName == null"><arco-button size="large" href="login_v3"><ArrowRightOutlined/>已经有账号了？登录</arco-button></div>
                 </div>
-            </a-carousel-item>
-            <a-carousel-item>
+            </arco-carousel-item>
+            <arco-carousel-item>
                 <div :style="defaultStyle" class="hero" style="background: url(https://t.mwm.moe/pc/) no-repeat; background-size: cover; color: #FFF; text-shadow: 0px 0px 6px #898989">
-                    <h2>v2版本上线</h2>
-                    <p>全新页面，支持分享功能，支持创建文件夹，用户系统大翻新以及更多小改动</p>
+                    <h2>v2.1版本上线</h2>
+                    <p>页面布局重构、支持创建分享（完成度10%）、修复一些小Bug以及一个还未完成的第三方登录模块（不要去试，不好用，没法用）</p>
                     <p>当然 我们依然愿意倾听您的反馈</p>
-                    <div><a-button size="large" type="primary" href="home_v2"><ArrowRightOutlined/>走你！</a-button></div>
+                    <div><arco-button class="slider-btn" size="large" type="primary" href="home_v2"><ArrowRightOutlined/>去看看？</arco-button></div>
                 </div>
-            </a-carousel-item>
-            <a-carousel-item>
+            </arco-carousel-item>
+            <arco-carousel-item>
                 <div :style="defaultStyle" class="hero" style="background: url(https://t.mwm.moe/fj/) no-repeat; background-size: cover; color: #FFF; text-shadow: 0px 0px 6px #898989">
-                    <h2>加入官方 QQ 频道</h2>
-                    <p>我们的官方QQ频道：仙舟通鉴</p>
+                    <h2>加入官方 QQ 频道 / 关注我们的B站</h2>
+                    <p>我们的官方QQ频道：仙舟通鉴，我们的官方B站账号：@仙舟通鉴wiki</p>
                     <p>来这里结识更多志同道合的米友，和其他编辑一起协作，反馈平台问题</p>
-                    <div><a-button size="large" type="primary" href="https://pd.qq.com/s/9p6w252k1" target="_blank"><ArrowRightOutlined/>走你！</a-button></div>
+                    <div><arco-button class="slider-btn" size="large" type="primary" href="https://pd.qq.com/s/9p6w252k1" target="_blank"><ArrowRightOutlined/>我要去频道！</arco-button></div>
+                    <div><arco-button class="slider-btn" size="large" status="warning" href="https://space.bilibili.com/3537119408556068" target="_blank"><ArrowRightOutlined/>我要去B站！</arco-button></div>
                 </div>
-            </a-carousel-item>
-        </a-carousel>
+            </arco-carousel-item>
+            <arco-carousel-item>
+                <div :style="defaultStyle" class="hero" style="background: url(https://imgapi.xl0408.top/index.php) no-repeat; background-size: cover; color: #FFF; text-shadow: 0px 0px 6px #898989">
+                    <h2>加入我们的核心用户群</h2>
+                    <p>如果您在频道中保持活跃并发表了一些有价值的内容，您将被邀请加入我们的飞书，和编辑高效交流，并体验还未发布的新功能</p>
+                    <p>只需要您在社区内保持活动即可</p>
+                    <div><arco-button size="large" type="primary" href="https://pd.qq.com/s/9p6w252k1" target="_blank"><ArrowRightOutlined/>加入 QQ 频道</arco-button></div>
+                    <div><arco-button class="slider-btn" size="large" href="https://www.feishu.cn/download" target="_blank"><ArrowRightOutlined/>下载飞书客户端</arco-button></div>
+                </div>
+            </arco-carousel-item>
+            <arco-carousel-item>
+                <div :style="defaultStyle" class="hero" style="background: url(https://api.oick.cn/random/api.php?type=pc) no-repeat; background-size: cover; color: #FFF; text-shadow: 0px 0px 6px #898989">
+                    <h2>短链接上线</h2>
+                    <p>认准正版：https://rlzline.icu</p>
+                    <p>谨防仙舟诈骗</p>
+                    <div><arco-button size="large" href="https://applink.feishu.cn/client/web_app/open?appId=cli_a5e014a1ca38100c&mode=appCenter" target="_blank"><ArrowRightOutlined/>在飞书内打开</arco-button></div>
+                </div>
+            </arco-carousel-item>
+        </arco-carousel>
         <div style="margin-top: 10px; padding: 20px; text-align: center;">
             <section>
                 <h1>为什么选择我们</h1>
@@ -62,43 +80,19 @@
             <section>
                 <h1>对此仍有疑问？</h1>
                 <article>
-                    <a-button type="primary" size="large" href="mailto:heycrab@petalmail.com"><PhoneOutlined/> 联系我们</a-button>
+                    <arco-button type="primary" size="large" href="mailto:heycrab@petalmail.com"><PhoneOutlined/> 联系我们</arco-button>
                 </article>
             </section>
         </div>
         <div style="padding: 20px 20px 0px 20px; height: 366px; background: url(https://portal.volccdn.com/obj/volcfe/bee_prod/biz_950/tos_2781e7adcbfb6de5c4b8888357699d4a.jpeg) no-repeat; text-align: center; display: flex; flex-direction: column">
             <h1>开启您的新旅程</h1>
             <span>加入我们的编辑团队，与我们一起建设 Wiki 的内容</span><br/>
-            <a-button type="primary" shape="round" href="/register" style="width: 30%; margin: auto;" size="large"><ArrowRightOutlined style="margin-right: 10px;"/>出发吧！</a-button>
+            <arco-button type="primary" shape="round" href="/register" style="width: 30%; margin: auto;" size="large"><ArrowRightOutlined style="margin-right: 10px;"/>出发吧！</arco-button>
         </div>
-        <a-layout-footer style="height: 100px; padding: 15px; background: #f5f5f5">
-            <div style="float: left; position: relative; bottom: 6px">
-                <h2>仙舟通鉴</h2>
-                <small>©{{ new Date().getFullYear() }} Crab Studio. All Rights Reserved.</small><br/>
-                <small>本站所有内容均以 CC-BY-NC-NA 协议授权。</small>
-            </div>
-            <!-- 这里需要注意最右边的导航栏是第一个div -->
-            <div style="float: right; margin-left: 20px; text-align: right;">
-                <h3 style="margin: 0; margin-bottom: 5px;">我们的服务</h3>
-                <a-link style="display: block;" target="_blank" href="https://seelevollerei.online"><RightOutlined style="margin-right: 10px;"/>仙舟通鉴</a-link>
-                <a-link style="display: block;" target="_blank" href="https://editor.seelevollerei.online"><RightOutlined style="margin-right: 10px;"/>Wiki 内容编辑器</a-link>
-                <a-link style="display: block;" target="_blank" href="https://help.seelevollerei.online"><RightOutlined style="margin-right: 10px;"/>帮助中心</a-link>
-            </div>
-            <div style="float: right; margin-left: 20px; text-align: right">
-                <h3 style="margin: 0; margin-bottom: 5px;">关注官方社媒</h3>
-                <a-link style="display: block;" target="_blank" href="https://space.bilibili.com/3537119408556068?spm_id_from=333.999.0.0"><RightOutlined style="margin-right: 10px;"/>哔哩哔哩</a-link>
-                <a-link style="display: block;" target="_blank" href="https://pd.qq.com/s/9p6w252k1"><RightOutlined style="margin-right: 10px;"/>QQ频道</a-link>
-            </div>
-            <div style="float: right; margin-left: 20px; text-align: right">
-                <h3 style="margin: 0; margin-bottom: 5px;">联系我们</h3>
-                <a-link href="mailto:heycrab@petalmail.com"><svg style="margin-right: 10px;" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#080341"/>
-</svg>heycrab@petalmail.com</a-link>
-            </div>
-        </a-layout-footer>
-      </a-layout-content>      
-    </a-layout>
-    <a-back-top target-container="#layout" :style="{position:'absolute'}" />
+        <Footer/>
+      </arco-layout-content>      
+    </arco-layout>
+    <arco-back-top target-container="#layout" :style="{position:'absolute'}" />
 </template>
 
 <style>
@@ -115,6 +109,9 @@
 .hero div{
     margin-top: 10px;
 }
+.slider-btn{
+    text-shadow: none
+}
 </style>
 
 <script lang="ts" setup>
@@ -124,6 +121,8 @@ import { useUserStore } from '../store/user'
 import { CSSProperties, watch } from 'vue';
 import { ArrowRightOutlined, EditOutlined, CheckCircleOutlined, PhoneOutlined, RightOutlined } from '@ant-design/icons-vue';
 import { ref } from 'vue';
+import Footer from '../components/footer.vue'
+
 let gradientAngle = ref(140);
 
 const defaultStyle = ref<CSSProperties>({
@@ -137,7 +136,7 @@ const defaultStyle = ref<CSSProperties>({
 
 const gradientStyle = ref<CSSProperties>({
     height: '100%',
-    background: `linear-gradient(${gradientAngle.value}deg, #acfcff, #8dc8ff)`,
+    background: `linear-gradient(${gradientAngle.value}deg, #ffd54f, #e6ee9c)`,
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
@@ -147,7 +146,7 @@ const gradientStyle = ref<CSSProperties>({
 const user = useUserStore();
 
 watch(gradientAngle, (newValue) => {
-  gradientStyle.value.background = `linear-gradient(${newValue}deg, #acfcff, #8dc8ff)`;
+  gradientStyle.value.background = `linear-gradient(${newValue}deg, #ffd54f, #e6ee9c)`;
 });
 
 setInterval(() => {
@@ -155,6 +154,6 @@ setInterval(() => {
 }, 10);
 
 onMounted(() => {
-    document.title = "首页 | 仙舟通鉴 Wiki 内容编辑器"
+    document.title = "首页 | 仙舟通鉴编辑器"
 })
 </script>

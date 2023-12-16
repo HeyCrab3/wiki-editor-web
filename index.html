@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="https://fe-static.crabapi.cn/xianzhoutongjian/91807422-1DDE-6A5E-5AEE-1F6B29EA53A1.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>仙舟通鉴 | Wiki 内容编辑器</title>
+    <title>仙舟通鉴编辑器</title>
     <style>
       html, body, #app{
         height: 100%
@@ -14,21 +14,80 @@
         src: url(/zh-cn.ttf);
       }
       @font-face {
+        font-family: HYSongYunLangHeiW-1;
+        src: url(/HYSongYunLangHeiW-1.ttf);
+      }
+      @font-face {
         font-family: HYXuanSong45S;
         src: url(/HYXuanSong45S.ttf);
       }
       html, body, #app{
-        font-family: 'sr', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'HYSongYunLangHeiW-1', 'sr', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         height: 100%
       }
       .arco-modal-mask{
+        -webkit-backdrop-filter: blur(10px);
+        -moz-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
       }
     </style>
+    <style>
+      #before-app-mount {
+        background-color: rgba(255, 255, 255, 0.589);
+        -webkit-backdrop-filter: blur(10px);
+        -moz-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        top: 0px;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+      }
+  
+      #before-app-mount-text {
+        text-align: center;
+      }
+  
+      ._nb-spinner {
+        width: 32px;
+        height: 32px;
+        margin: 0 auto;
+        background: transparent;
+        border: 2px solid #66CCFF;
+        border-right: 2px solid transparent;
+        border-radius: 50%;
+        animation: 1s _spin linear infinite;
+      }
+  
+      @keyframes _spin {
+        from {
+          transform: rotate(0deg);
+        }
+  
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <script>
+      window.removeLoadingPage = function(){
+        document.getElementById("before-app-mount").setAttribute("style", "display: none;");
+      }
+    </script>
   </head>
-  <body style="font-family: 'sr', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    <div id="app" style="font-family: 'sr', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"></div>
+  <body>
+    <div id="before-app-mount" data-component-type="loading">
+      <div id="before-app-mount-text">
+        <div class="_nb-spinner"></div>
+      </div>
+    </div>
+    <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     <script src="https://static.geetest.com/v4/gt4.js"></script>
   </body>

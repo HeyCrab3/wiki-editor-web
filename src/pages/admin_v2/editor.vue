@@ -1,79 +1,79 @@
 <template>
-    <a-layout style="height: 100%;">
-      <a-layout-header style="box-shadow: 0px 0px 6px #d1d1d1; border-radius: 0px 0px 10px 0px;">
-        <a-page-header style="border-radius: 0px 0px 10px 0px;"
+    <arco-layout style="height: 100%;">
+      <arco-layout-header style="box-shadow: 0px 0px 6px #d1d1d1; border-radius: 0px 0px 10px 0px;">
+        <arco-page-header style="border-radius: 0px 0px 10px 0px;"
             :title="title"
             :subtitle="subtitle"
             @back="goBack"
             >
             <template #extra>
-                <a-button @click="passVerify" status="success" shape="round"><icon-check style="margin-right: 5px;"/>审核通过</a-button>
-                <a-button @click="returnVerify" status="danger" shape="round"><icon-close style="margin-right: 5px;"/>审核不通过</a-button>
+                <arco-button @click="passVerify" status="success" shape="round"><icon-check style="margin-right: 5px;"/>审核通过</arco-button>
+                <arco-button @click="returnVerify" status="danger" shape="round"><icon-close style="margin-right: 5px;"/>审核不通过</arco-button>
             </template>
-            </a-page-header>
-      </a-layout-header>
-      <a-layout>
-        <a-layout-sider style="width: 300px; padding: 10px">
-            <a-tabs class="function_bar" type="rounded" position="left" :default-active-key="'1'">
-                <a-tab-pane key="1">
+            </arco-page-header>
+      </arco-layout-header>
+      <arco-layout>
+        <arco-layout-sider style="width: 300px; padding: 10px">
+            <arco-tabs class="function_bar" type="rounded" position="left" :default-active-key="'1'">
+                <arco-tab-pane key="1">
                     <template #title style="text-align: center;"><icon-clock-circle/>常用</template>
                     <template v-for="item in btnList">
-                        <a-button v-if="item['position'].indexOf(0) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
+                        <arco-button v-if="item['position'].indexOf(0) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></arco-button>
                     </template>
-                    <a-alert type="info">如需使用图片上传功能，请使用顶部菜单栏图片图标中的上传本地图片或直接拖拽图片进编辑器</a-alert>
-                </a-tab-pane>
-                <a-tab-pane key="2">
+                    <arco-alert type="info">如需使用图片上传功能，请使用顶部菜单栏图片图标中的上传本地图片或直接拖拽图片进编辑器</arco-alert>
+                </arco-tab-pane>
+                <arco-tab-pane key="2">
                     <template #title style="text-align: center;"><icon-h1/>段落</template>
                     <template v-for="item in btnList">
-                        <a-button v-if="item['position'].indexOf(1) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
+                        <arco-button v-if="item['position'].indexOf(1) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></arco-button>
                     </template>
-                </a-tab-pane>
-                <a-tab-pane key="3">
+                </arco-tab-pane>
+                <arco-tab-pane key="3">
                     <template #title style="text-align: center;"><icon-bold/>内容</template>
                     <template v-for="item in btnList">
-                        <a-button v-if="item['position'].indexOf(2) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
+                        <arco-button v-if="item['position'].indexOf(2) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></arco-button>
                     </template>
-                </a-tab-pane>
-                <a-tab-pane key="4">
+                </arco-tab-pane>
+                <arco-tab-pane key="4">
                     <template #title style="text-align: center;"><icon-link/>交互</template>
                     <template v-for="item in btnList">
-                        <a-button v-if="item['position'].indexOf(3) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
+                        <arco-button v-if="item['position'].indexOf(3) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></arco-button>
                     </template>
-                </a-tab-pane>
-                <a-tab-pane key="5">
+                </arco-tab-pane>
+                <arco-tab-pane key="5">
                     <template #title style="text-align: center;"><icon-live-broadcast/>展示</template>
                     <template v-for="item in btnList">
-                        <a-button v-if="item['position'].indexOf(4) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
+                        <arco-button v-if="item['position'].indexOf(4) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></arco-button>
                     </template>
-                    <a-alert type="info">如需使用图片上传功能，请使用顶部菜单栏图片图标中的上传本地图片或直接拖拽图片进编辑器</a-alert>
-                </a-tab-pane>
-                <a-tab-pane key="6">
+                    <arco-alert type="info">如需使用图片上传功能，请使用顶部菜单栏图片图标中的上传本地图片或直接拖拽图片进编辑器</arco-alert>
+                </arco-tab-pane>
+                <arco-tab-pane key="6">
                     <template #title style="text-align: center;"><icon-more/>其他</template>
                     <template v-for="item in btnList">
-                        <a-button v-if="item['position'].indexOf(5) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></a-button>
+                        <arco-button v-if="item['position'].indexOf(5) > -1" @click="clickEvent(item['name'])" style="width: 64px; height: 64px; text-align: center; margin-right: 10px; margin-bottom: 10px;;"><div><Icon :icon="item['icon']"/><br/>{{ item['title'] }}</div></arco-button>
                     </template>
-                </a-tab-pane>
-            </a-tabs>
-        </a-layout-sider>
-        <a-layout-content style="height: 100%">
-            <a-spin :loading="loading" style="width: 100%; height: 100%">
+                </arco-tab-pane>
+            </arco-tabs>
+        </arco-layout-sider>
+        <arco-layout-content style="height: 100%">
+            <arco-spin :loading="loading" style="width: 100%; height: 100%">
                 <v-md-editor height="100%" :disabled-menus="[]" @upload-image="handleUploadImage" @blur="save" @save="$message.info('我们会实时自动保存你的文件')" v-model="content"></v-md-editor>
-            </a-spin>
-        </a-layout-content>
-      </a-layout>
-    </a-layout>
-  <a-modal v-model:visible="v2" :on-before-ok="l">
+            </arco-spin>
+        </arco-layout-content>
+      </arco-layout>
+    </arco-layout>
+  <arco-modal v-model:visible="v2" :on-before-ok="l">
     <template #title>
       请填写驳回原因
     </template>
     <div style="margin-top: 20px;">
-      <a-input v-model="reason" placeholder="驳回原因" allow-clear>
+      <arco-input v-model="reason" placeholder="驳回原因" allow-clear>
         <template #prefix>
           <icon-edit />
         </template>
-      </a-input>
+      </arco-input>
     </div>
-  </a-modal>
+  </arco-modal>
 </template>
 
 <style scoped>
@@ -245,13 +245,13 @@ const btnList = [
 ]
 
 onMounted(() => {
-    document.title = "编辑器 | 仙舟通鉴 Wiki 内容管理器"
+    document.title = "编辑器 | 仙舟通鉴编辑器"
     Axios(`/api/v2/content_manage/zone/3/getContent?id=${router.currentRoute.value.params['id']}`)
     .then(function(r){
         if (r['data']['code'] != 0){
             Message.warning(r['data']['msg'])
         }else{
-            document.title = `编辑 ${r['data']['data']['title']} | 仙舟通鉴 Wiki 内容管理器`
+            document.title = `编辑 ${r['data']['data']['title']} | 仙舟通鉴编辑器`
             data.value = r['data']['data']
             title.value = r['data']['data']['title']
             content.value = r['data']['data']['content']

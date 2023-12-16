@@ -1,8 +1,8 @@
 <template>
-    <a-typography-title :heading="4">数据库</a-typography-title>
+    <arco-typography-title :heading="4">数据库</arco-typography-title>
     <div>
-        <a-auto-complete style="width: 20%" v-model="dbname" :data="options" placeholder="数据库名"></a-auto-complete>
-        <a-button @click="getDB" style="display: inline-block;" type="primary">查找</a-button>
+        <arco-auto-complete style="width: 20%" v-model="dbname" :data="options" placeholder="数据库名"></arco-auto-complete>
+        <arco-button @click="getDB" style="display: inline-block;" type="primary">查找</arco-button>
     </div>
     <div id="monaco-editor"></div>
 </template>

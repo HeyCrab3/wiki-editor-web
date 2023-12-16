@@ -1,18 +1,18 @@
 <template>
     <Menu/>
     <div style="width: 100%; height: 100%">
-        <a-layout style="height: 100%">
-            <a-layout>
-                <a-layout-sider theme="dark">
+        <arco-layout style="height: 100%">
+            <arco-layout>
+                <arco-layout-sider theme="dark">
                     <VerticalMenu/>
-                </a-layout-sider>
-                <a-layout-content>
+                </arco-layout-sider>
+                <arco-layout-content>
                     <div style="padding: 16px 20px; height: 100%">
                         <router-view></router-view>
                     </div>
-                </a-layout-content>
-            </a-layout>
-        </a-layout>
+                </arco-layout-content>
+            </arco-layout>
+        </arco-layout>
   </div>
 </template>
 

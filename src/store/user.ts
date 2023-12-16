@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import Axios from 'axios'
 import { useRouter } from 'vue-router'
-import { Message } from "@arco-design/web-vue";
+import { message } from "ant-design-vue";
 
 export const useUserStore = defineStore('user_info', () => {
     const router = useRouter();
@@ -11,7 +11,8 @@ export const useUserStore = defineStore('user_info', () => {
         'userName': undefined,
         'nickName': undefined,
         'phone': undefined,
-        'perm': undefined
+        'perm': undefined,
+        'loggedIn': false
     })
 
     const fetchUserData = () => {
@@ -20,14 +21,10 @@ export const useUserStore = defineStore('user_info', () => {
         })
         .then(function(r){
           if (r['data']['code'] != 0){
-            if (router.currentRoute.value.fullPath == '/' || router.currentRoute.value.fullPath == '/app'){
-              console.log('不在需登录页面内')
-            }else{
-              Message.error('登录已失效，请重新登录')
-              router.push(`/login?redirect_to=${router.currentRoute.value.fullPath}`)
-            }
+            if (r['data']['msg'] != '无效会话') message.error(r['data']['msg'])
           } else {
             user_data.value = r['data']['userdata']
+            user_data.value['loggedIn'] = true
             return { isSuccess: true, msg: undefined }
           }
         })

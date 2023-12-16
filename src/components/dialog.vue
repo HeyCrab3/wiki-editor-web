@@ -5,9 +5,9 @@
                 <span class="cui-dialog-title">{{ title }}</span>
                 <CloseOutlined style="float: right;" @click="emit('close')"/>
                 <p class="cui-dialog-text">{{ content }}</p>
-                <a-button size="large" @click="emit('close')" style="float: right; position: absolute; right: 100px; bottom: 20px; border-radius: 5px;;">取消</a-button>
-                <a-button class="confirm" v-if="type == 1" type="primary" size="large" @click="emit('ok')" style="border: 0; float: right; position: absolute; right: 20px; bottom: 20px; border-radius: 5px;;">确认</a-button>
-                <a-button class="confirm" v-else type="primary" size="large" @click="emit('close')" style="border: 0; float: right; position: absolute; right: 20px; bottom: 20px; border-radius: 5px;;">确认</a-button>
+                <arco-button size="large" @click="emit('close')" style="float: right; position: absolute; right: 100px; bottom: 20px; border-radius: 5px;;">取消</arco-button>
+                <arco-button class="confirm" v-if="type == 1" type="primary" size="large" @click="emit('ok')" style="border: 0; float: right; position: absolute; right: 20px; bottom: 20px; border-radius: 5px;;">确认</arco-button>
+                <arco-button class="confirm" v-else type="primary" size="large" @click="emit('close')" style="border: 0; float: right; position: absolute; right: 20px; bottom: 20px; border-radius: 5px;;">确认</arco-button>
             </div>
         </div>
     </div>

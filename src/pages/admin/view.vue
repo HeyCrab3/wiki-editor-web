@@ -1,22 +1,22 @@
 <template>
-    <a-spin style="width: 100%; height: 100%" :loading="loading" :size="32" tip="正在加载数据">
-        <a-typography-title :heading="4">审阅</a-typography-title>
+    <arco-spin style="width: 100%; height: 100%" :loading="loading" :size="32" tip="正在加载数据">
+        <arco-typography-title :heading="4">审阅</arco-typography-title>
         <div style="margin-top: 25px; width: 100%; height: 100%">
-            <a-table :draggable="{}" :data="data">
+            <arco-table :draggable="{}" :data="data">
                 <template #columns>
                     <template v-for="item in columns">
-                        <a-table-column :title="item['title']" :data-index="item['dataIndex']">
-                        </a-table-column>
+                        <arco-table-column :title="item['title']" :datarco-index="item['dataIndex']">
+                        </arco-table-column>
                     </template>
-                    <a-table-column title="操作">
+                    <arco-table-column title="操作">
                         <template #cell="{ record }">
-                            <a-button type="primary" @click="push(record['_id'])">查看</a-button>
+                            <arco-button type="primary" @click="push(record['_id'])">查看</arco-button>
                         </template>
-                    </a-table-column>
+                    </arco-table-column>
                 </template>
-            </a-table>
+            </arco-table>
         </div>
-    </a-spin>
+    </arco-spin>
 </template>
 
 <style scoped>
@@ -66,7 +66,7 @@ const push = (id: string) => {
 }
 
 onMounted(() => {
-    document.title = "审阅 | 仙舟通鉴 Wiki 内容管理器"
+    document.title = "审阅 | 仙舟通鉴编辑器"
     Axios('/api/v1/content_manage/zone/2/getCurrentContentList')
     .then(function(r){
         if (r['data']['code'] != 0){

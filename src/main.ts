@@ -1,16 +1,19 @@
 import { createApp } from 'vue'
 import * as Sentry from '@sentry/vue'
-import ArcoVue from '@arco-design/web-vue';
+import Antd from 'ant-design-vue';
 import App from './App.vue';
 import ArcoVueIcon from '@arco-design/web-vue/es/icon';
-import '@arco-design/web-vue/dist/arco.css';
 import router from './router';
 import VMdEditor from '@kangc/v-md-editor/lib/codemirror-editor';
 import '@kangc/v-md-editor/lib/style/codemirror-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
 import { createPinia } from 'pinia';
-
+import "@arco-design/web-vue/es/message/style/css.js"
+import "@arco-design/web-vue/es/notification/style/css.js"
+import "@arco-design/web-vue/es/modal/style/css.js"
+import "@arco-design/web-vue/es/icon/index.d.ts"
+import { message } from 'ant-design-vue'
 // highlightjs
 import hljs from 'highlight.js';
 
@@ -40,6 +43,9 @@ import { getAnalytics } from "firebase/analytics";
 import { getPerformance } from 'firebase/performance'
 import { useUserStore } from './store/user';
 
+// 路由守卫
+import Cookies from 'js-cookie'
+
 const firebaseConfig = {
   apiKey: "AIzaSyDvp3Qm6UjsOQK35bdGkgXhGDkOz6HeHZk",
   authDomain: "editor-web-88d70.firebaseapp.com",
@@ -57,6 +63,24 @@ const perf = getPerformance(firebaseApp)
 
 
 const app = createApp(App);
+
+const whileList = ['/', '/app', '/share', '/editor_v3', '/login_v3', '/register_v3', '/forget_password', '/login', '/register', '/uniLogin']
+ 
+router.beforeEach((to, from, next) => {
+    let token = Cookies.get('session')
+    //白名单 有值 或者登陆过存储了token信息可以跳转 否则就去登录页面
+    if (whileList.includes(to.path) || token) {
+        next()
+    } else {
+        message.error('请先登录')
+        next({
+            path:'/login_v3',
+            query: {
+                redirect_to: to.fullPath
+            }
+        })
+    }
+})
 
 Sentry.init({
   app,
@@ -87,9 +111,12 @@ VMdEditor.use(vuepressTheme, {
   Hljs: hljs,
 });
 
-app.use(ArcoVue);
+app.use(Antd)
 app.use(router);
 app.use(ArcoVueIcon);
 app.use(VMdEditor);
 app.use(createPinia(useUserStore))
+
+window.removeLoadingPage()
+
 app.mount('#app');

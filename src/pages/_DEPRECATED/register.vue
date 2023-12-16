@@ -4,99 +4,97 @@
         <div class="login">
             <div class="container">
                 <h2>注册</h2>
-                <a-form
+                <arco-form
                     :model="formState"
                     layout="vertical"
                 >
-                    <a-form-item
+                    <arco-form-item
                     field="userName"
                     label="用户名"
                     :rules="[{ required: true, message: '请输入用户名' }]"
                     :validate-trigger="['change','input']"
                     >
-                    <a-input :disabled="isLoading" placeholder="用户名" v-model="formState.userName">
+                    <arco-input :disabled="isLoading" placeholder="用户名" v-model="formState.userName">
                         <template #prefix>
                         <UserOutlined class="site-form-item-icon" />
                         </template>
-                    </a-input>
-                    </a-form-item>
+                    </arco-input>
+                    </arco-form-item>
 
-                    <a-form-item
+                    <arco-form-item
                     field="nick"
                     label="昵称"
                     :rules="[{ required: true, message: '请输入昵称' }]"
                     :validate-trigger="['change','input']"
                     >
-                    <a-input :disabled="isLoading" placeholder="昵称" v-model="formState.nick">
+                    <arco-input :disabled="isLoading" placeholder="昵称" v-model="formState.nick">
                         <template #prefix>
                         <UserOutlined class="site-form-item-icon" />
                         </template>
-                    </a-input>
-                    </a-form-item>
+                    </arco-input>
+                    </arco-form-item>
 
-                    <a-form-item
+                    <arco-form-item
                             field="phone"
                             label="手机号"
                             :rules="[{ required: true, message: '请输入手机号' }]"
                             :validate-trigger="['change','input']"
                             >
-                            <a-input :disabled="isLoading" placeholder="手机号" v-model="formState.phone">
+                            <arco-input :disabled="isLoading" placeholder="手机号" v-model="formState.phone">
                                 <template #prefix>
                                 <MobileOutlined class="site-form-item-icon" />
                                 </template>
-                            </a-input>
-                            </a-form-item>
+                            </arco-input>
+                            </arco-form-item>
 
-                            <a-form-item
+                            <arco-form-item
                             field="code"
                             label="验证码"
                             :rules="[{ required: true, message: '请输入验证码' }]"
                             :validate-trigger="['change','input']"
                             >
-                            <a-input :disabled="isLoading" placeholder="验证码" v-model="formState.code">
+                            <arco-input :disabled="isLoading" placeholder="验证码" v-model="formState.code">
                                 <template #prefix>
                                 <CodeOutlined class="site-form-item-icon" />
                                 </template>
                                 <template #suffix>
-                                <a-button @click="click" :disabled="cooldown" :loading="sending" type="primary">{{ button_txt }}</a-button>
+                                <arco-button @click="click" :disabled="cooldown" :loading="sending" type="primary">{{ button_txt }}</arco-button>
                                 </template>
-                            </a-input>
-                        </a-form-item>
+                            </arco-input>
+                        </arco-form-item>
                     
-                    <a-form-item
+                    <arco-form-item
                     field="passWord"
                     label="密码"
                     :rules="[{ required: true, message: '请输入密码' }]"
                     :validate-trigger="['change','input']"
                     >
-                    <a-input-password :disabled="isLoading" placeholder="密码" v-model="formState.passWord">
+                    <arco-input-password :disabled="isLoading" placeholder="密码" v-model="formState.passWord">
                         <template #prefix>
                         <LockOutlined class="site-form-item-icon" />
                         </template>
-                    </a-input-password>
-                    </a-form-item>
+                    </arco-input-password>
+                    </arco-form-item>
 
-                    <a-form-item
+                    <arco-form-item
                     field="confirmPassWord"
                     label="确认密码"
                     :rules="[{ required: true, message: '请输入密码' }]"
                     :validate-trigger="['change','input']"
                     >
-                    <a-input-password :disabled="isLoading" placeholder="确认密码" v-model="formState.confirmPassWord">
+                    <arco-input-password :disabled="isLoading" placeholder="确认密码" v-model="formState.confirmPassWord">
                         <template #prefix>
                         <LockOutlined class="site-form-item-icon" />
                         </template>
-                    </a-input-password>
-                    </a-form-item>
+                    </arco-input-password>
+                    </arco-form-item>
 
-                    <a-form-item>
-                    <a-button type="primary" style="width: 100%" :loading="isLoading" :disabled="disabled" variant="solid" @click="post">
+                    <arco-form-item>
+                    <arco-button type="primary" style="width: 100%" :loading="isLoading" :disabled="disabled" variant="solid" @click="post">
                         注册
-                    </a-button>
-                    </a-form-item>
-
-                    <a-form-item><a-link href="#" @click="push">返回登录</a-link></a-form-item>
-                </a-form>
+                    </arco-button>
+                    </arco-form-item>
+                </arco-form>
             </div>
         </div>
     </div>
@@ -191,9 +189,9 @@ const send = () => {
     })
 }
 
-const push = () => { router.push('/login') }
+const push = () => { router.push('/login_v3') }
 
-onMounted(() => { document.title = "注册 | 仙舟通鉴 Wiki 内容管理器" })
+onMounted(() => { document.title = "注册 | 仙舟通鉴编辑器" })
 
 Axios('/api/v1/heartbeat')
 .then(function(Response){

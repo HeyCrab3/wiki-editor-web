@@ -3,47 +3,47 @@
         <div class="login">
             <div class="container">
                 <h2>旧版账号登录</h2>
-                <a-form
+                <arco-form
                     ref="formRef"
                     :model="formState"
                     @submit="onFinish"
                     layout="vertical"
                 >
-                    <a-form-item
+                    <arco-form-item
                     field="userName"
                     label="用户名"
                     :rules="[{ required: true, message: '请输入用户名' }]"
                     :validate-trigger="['change','input']"
                     >
-                    <a-input :disabled="isLoading" placeholder="用户名" v-model="formState.userName">
+                    <arco-input :disabled="isLoading" placeholder="用户名" v-model="formState.userName">
                         <template #prefix>
                         <UserOutlined class="site-form-item-icon" />
                         </template>
-                    </a-input>
-                    </a-form-item>
+                    </arco-input>
+                    </arco-form-item>
 
-                    <a-form-item
+                    <arco-form-item
                     field="passWord"
                     label="密码"
                     :rules="[{ required: true, message: '请输入密码' }]"
                     :validate-trigger="['change','input']"
                     >
-                    <a-input-password :disabled="isLoading" placeholder="密码" v-model="formState.passWord">
+                    <arco-input-password :disabled="isLoading" placeholder="密码" v-model="formState.passWord">
                         <template #prefix>
                         <LockOutlined class="site-form-item-icon" />
                         </template>
-                    </a-input-password>
-                    </a-form-item>
+                    </arco-input-password>
+                    </arco-form-item>
 
-                    <a-form-item>
-                    <a-button style="width: 100%" :loading="isLoading" :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
+                    <arco-form-item>
+                    <arco-button style="width: 100%" :loading="isLoading" :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
                         登录
-                    </a-button>
-                    </a-form-item>
-                    <a-form-item>
-                        <a-link href="/login">返回</a-link>
-                    </a-form-item>
-                </a-form>
+                    </arco-button>
+                    </arco-form-item>
+                    <arco-form-item>
+                        <arco-link href="/login">返回</arco-link>
+                    </arco-form-item>
+                </arco-form>
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@ import { routerKey, useRouter } from 'vue-router';
 const isLoading = ref(false)
 const router = useRouter()
 
-onMounted(() => { document.title = "登录 | 仙舟通鉴 Wiki 内容管理器" })
+onMounted(() => { document.title = "登录 | 仙舟通鉴编辑器" })
 
 Axios('/api/v1/heartbeat')
 .then(function(Response){

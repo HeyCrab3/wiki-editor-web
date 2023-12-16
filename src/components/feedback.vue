@@ -1,11 +1,11 @@
 <template>
-    <a-dropdown v-model:popup-visible="popupVisible" position="top">
+    <arco-dropdown v-model:popup-visible="popupVisible" position="top">
         <div @click="popupVisible = !popupVisible" class="feedback" :style="gradientStyle"><MessageOutlined/><span style="margin: auto; display: inline-block; text-align: center; font-size: 1.1em; margin-top: 10px; margin-left: 5px;">我们愿意倾听您的反馈</span></div>
         <template #content>
-            <a-doption @click="wj">问卷调研</a-doption>
-            <a-doption @click="txc">用户之声</a-doption>
+            <arco-doption @click="wj">问卷调研</arco-doption>
+            <arco-doption @click="txc">用户之声</arco-doption>
         </template>
-    </a-dropdown>
+    </arco-dropdown>
 </template>
 
 <style>

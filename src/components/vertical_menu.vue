@@ -1,11 +1,11 @@
 <template>
-    <a-menu mode="vertical" theme="dark" :default-selected-keys="[router.currentRoute.value.fullPath]">
-        <router-link to="/admin/home"><a-menu-item key="/admin/home">管理主页</a-menu-item></router-link>
-        <router-link to="/admin/view"><a-menu-item key="/admin/view">审阅</a-menu-item></router-link>
-        <router-link to="/admin/user"><a-menu-item key="/admin/user">用户管理</a-menu-item></router-link>
-        <router-link to="/admin/download"><a-menu-item key="/admin/download">下载已审阅内容</a-menu-item></router-link>
-        <router-link to="/admin/db"><a-menu-item key="/admin/db">数据库</a-menu-item></router-link>
-    </a-menu>
+    <arco-menu mode="vertical" theme="dark" :default-selected-keys="[router.currentRoute.value.fullPath]">
+        <router-link to="/admin/home"><arco-menu-item key="/admin/home">管理主页</arco-menu-item></router-link>
+        <router-link to="/admin/view"><arco-menu-item key="/admin/view">审阅</arco-menu-item></router-link>
+        <router-link to="/admin/user"><arco-menu-item key="/admin/user">用户管理</arco-menu-item></router-link>
+        <router-link to="/admin/download"><arco-menu-item key="/admin/download">下载已审阅内容</arco-menu-item></router-link>
+        <router-link to="/admin/db"><arco-menu-item key="/admin/db">数据库</arco-menu-item></router-link>
+    </arco-menu>
 </template>
 
 <script setup lang="ts">

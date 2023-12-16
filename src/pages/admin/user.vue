@@ -1,32 +1,32 @@
 <template>
-    <a-typography-title :heading="4">用户</a-typography-title>
-    <a-spin :loading="loading" style="width: 100%;">
-        <a-table :draggable="{}" style="animation: slider 2s; width: 100%;" :data="data">
+    <arco-typography-title :heading="4">用户</arco-typography-title>
+    <arco-spin :loading="loading" style="width: 100%;">
+        <arco-table :draggable="{}" style="animation: slider 2s; width: 100%;" :data="data">
             <template #columns>
                     <template v-for="item in columns">
-                        <a-table-column :title="item['title']" :data-index="item['dataIndex']">
-                        </a-table-column>
+                        <arco-table-column :title="item['title']" :datarco-index="item['dataIndex']">
+                        </arco-table-column>
                     </template>
-                    <a-table-column title="操作">
+                    <arco-table-column title="操作">
                         <template #cell="{ record }">
-                            <a-button status="success" type="primary" @click="b(record['userName'])">更改权限</a-button>
-                            <a-button status="warning" style="margin-left: 10px;" type="primary" @click="BanUser(record['userName'])">封禁/解封</a-button>
-                            <a-button status="danger" style="margin-left: 10px;" type="primary" @click="DeleteUser(record['userName'])">删号</a-button>
+                            <arco-button status="success" type="primary" @click="b(record['userName'])">更改权限</arco-button>
+                            <arco-button status="warning" style="margin-left: 10px;" type="primary" @click="BanUser(record['userName'])">封禁/解封</arco-button>
+                            <arco-button status="danger" style="margin-left: 10px;" type="primary" @click="DeleteUser(record['userName'])">删号</arco-button>
                         </template>
-                    </a-table-column>
+                    </arco-table-column>
                 </template>
-        </a-table>
-    </a-spin>
-    <a-modal v-model:visible="c" title="更新权限" :on-before-ok="updatePermission">
+        </arco-table>
+    </arco-spin>
+    <arco-modal v-model:visible="c" title="更新权限" :on-before-ok="updatePermission">
         <div>您正在更新用户 {{ username }} 的权限，请在下方选择新权限</div>
         <div style="margin-top: 20px;">
-            <a-select v-model="a" :style="{width:'320px'}" placeholder="Please select ...">
-                <a-option :value="0">普通用户</a-option>
-                <a-option :value="1">编辑</a-option>
-                <a-option :value="2">管理员</a-option>
-            </a-select>
+            <arco-select v-model="a" :style="{width:'320px'}" placeholder="Please select ...">
+                <arco-option :value="0">普通用户</arco-option>
+                <arco-option :value="1">编辑</arco-option>
+                <arco-option :value="2">管理员</arco-option>
+            </arco-select>
         </div>
-    </a-modal>
+    </arco-modal>
 </template>
 
 <style scoped>

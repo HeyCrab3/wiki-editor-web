@@ -1,20 +1,7 @@
 <template>
-    <CUiDialog @ok="logout" @close="close" :type="1" :open="exit" title="退出登录" content="真的要这么做吗？"/>
-    <a-layout style="height: 100%;">
-      <a-layout>
-        <a-layout-sider style="width: 270px">
-            <div style="padding: 10px;">
-                <img style="width: 32px" src="/light.png" alt="logo"/>
-                <h2 style="display: inline-block; position: relative; bottom: 10px; left: 6px; font-size: 1rem;">仙舟通鉴 | Wiki 内容编辑器</h2>
-            </div>
-            <MenuNext @logout="exit = true"/>
-        </a-layout-sider>
-        <a-layout-content>
-            <Layout/>
-            <FeedBack/>
-        </a-layout-content>
-      </a-layout>
-    </a-layout>
+    <EditorLayout>
+      <Layout/>
+    </EditorLayout>
 </template>
 
 <style>
@@ -39,14 +26,9 @@
 </style>
 
 <script lang="ts" setup>
-import MenuNext from '../components/menu_next.vue'
-import FeedBack from '../components/feedback.vue'
-import Carousel from '../components/carousel.vue'
-import Axios from 'axios'
+import EditorLayout from '../components/editor_layout.vue'
 import { ref, onMounted } from 'vue'
 import CUiDialog from '../components/dialog.vue'
-import { Message, Modal } from '@arco-design/web-vue'
-import { PlusOutlined, ClockCircleOutlined, IdcardOutlined, MoreOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
 import Layout from '../components/admin/admin_layout.vue'
 

@@ -1,7 +1,7 @@
 <template>
     <div style="height: 100%; text-align: center; vertical-align: middle; text-align: center; justify-content: center; flex-direction: column; display: flex; background: url(https://t.mwm.moe/fj/) no-repeat; background-size: cover;">
         <div style="padding: 45px; background: #FFF; width:200px; margin: auto; border-radius: 15px">
-            <a-spin :size="32"/>
+            <arco-spin :size="32"/>
             <h2>{{ title }}</h2>
             <h3>稍作等待，马上就好</h3>
         </div>

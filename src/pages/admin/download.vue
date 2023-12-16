@@ -1,18 +1,18 @@
 <template>
-    <a-typography-title :heading="4">下载已审阅内容</a-typography-title>
-    <a-table :draggable="{}" :data="data">
+    <arco-typography-title :heading="4">下载已审阅内容</arco-typography-title>
+    <arco-table :draggable="{}" :data="data">
             <template #columns>
                 <template v-for="item in columns">
-                    <a-table-column :title="item['title']" :data-index="item['dataIndex']">
-                    </a-table-column>
+                    <arco-table-column :title="item['title']" :datarco-index="item['dataIndex']">
+                    </arco-table-column>
                 </template>
-                <a-table-column title="操作">
+                <arco-table-column title="操作">
                     <template #cell="{ record }">
-                        <a-button type="primary" @click="blob(record['_id'])">下载</a-button>
+                        <arco-button type="primary" @click="blob(record['_id'])">下载</arco-button>
                     </template>
-                </a-table-column>
+                </arco-table-column>
             </template>
-        </a-table>
+        </arco-table>
 </template>
 
 <style scoped>
@@ -55,7 +55,7 @@ const columns = [
 ]
 
 onMounted(() => {
-    document.title = "审阅 | 仙舟通鉴 Wiki 内容管理器"
+    document.title = "审阅 | 仙舟通鉴编辑器"
     Axios('/api/v1/content_manage/zone/3/getList')
     .then(function(r){
         if (r['data']['code'] != 0){

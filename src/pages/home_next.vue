@@ -1,143 +1,133 @@
 <template>
-    <CUiDialog @ok="logout" @close="close" :type="1" :open="exit" title="退出登录" content="真的要这么做吗？"/>
-    <a-layout style="height: 100%;">
-      <a-layout>
-        <a-layout-sider style="width: 270px">
-            <div style="padding: 10px;">
-                <img style="width: 32px" src="/light.png" alt="logo"/>
-                <h2 style="display: inline-block; position: relative; bottom: 10px; left: 6px; font-size: 1rem;">仙舟通鉴 | Wiki 内容编辑器</h2>
-            </div>
-            <MenuNext @logout="exit = true"/>
-        </a-layout-sider>
-        <a-layout-content style="padding: 10px">
-          <a-alert style="margin-bottom: 10px;" type="warning">v2版本仍在测试，如遇问题欢迎加入我们的官方QQ频道：仙舟通鉴 进行反馈，或直接点击右下角“用户之声”反馈。如需提取旧版编辑器资料，请发信到heycrab@petalmail.com，一般7个工作日内回复。</a-alert>
-            <h2 style="margin-left: 10px;">我的文件</h2>
-            <span style="margin-left: 10px;">您共有 {{ file_list.length }} 个文件，{{ folder_list.length }} 个文件夹</span>
-            <a-breadcrumb style="display: block; margin: 10px 0px 0px 10px">
-                <template #separator>
-                    <icon-right />
-                </template>
-                <a-breadcrumb-item @click="router.push('/home_v2?path=/')" style="cursor: pointer">根目录</a-breadcrumb-item>
-                <a-breadcrumb-item v-if="router.currentRoute.value.query.path != '/'">{{ router.currentRoute.value.query.path }}</a-breadcrumb-item>
-            </a-breadcrumb>
-            <a-dropdown-button @click="v1 = true" type="primary" style="display: block; margin-top: 20px; margin-left: 10px;">
-                    <PlusOutlined/>新建文件<template #icon>
-                        <icon-down />
-                    </template>
+  <EditorLayout>
+    <h1 style="margin-left: 10px;">我的文件</h1>
+    <span style="margin-left: 10px;">当前目录下共有 {{ file_list.length }} 个文件，{{ folder_list.length }} 个文件夹</span>
+    <arco-breadcrumb style="display: block; margin: 10px 0px 0px 10px">
+        <template #separator>
+          <icon-right />
+        </template>
+        <arco-breadcrumb-item @click="router.push('/home_v2?path=/')" style="cursor: pointer">根目录</arco-breadcrumb-item>
+        <arco-breadcrumb-item v-if="router.currentRoute.value.query.path != '/'">{{ router.currentRoute.value.query.path }}</arco-breadcrumb-item>
+      </arco-breadcrumb>
+      <arco-dropdown-button shape="round" @click="v1 = true" type="primary" style="display: block; margin-top: 20px; margin-left: 10px;">
+          <PlusOutlined/>新建文件<template #icon><icon-down /></template><template #content><arco-doption @click="v3 = true">新建文件夹</arco-doption></template>
+      </arco-dropdown-button>
+      <arco-spin :loading="loading" style="width: 90%">
+        <div>
+            <div v-for="(item, index) in folder_list" class="content-card">
+                <span style="margin-left: 10px;"><arco-tooltip content="文件夹"><FolderOutlined style="margin-right: 10px;"/></arco-tooltip>{{item['title']}}</span>
+                <arco-tooltip content="最后编辑时间"><span style="margin-left: 10%;"><ClockCircleOutlined/>  {{ formatDate(item['update_time']) }}</span></arco-tooltip>
+                <arco-tooltip content="内容ID"><span style="margin-left: 10%;"><IdcardOutlined/>  {{ item['_id']['$oid'] }}</span></arco-tooltip>
+                <div style="margin-right: 10px; display: inline-block; float: right">
+                  <arco-button @click="router.push('/home_v2?path=' + item['title'])" type="primary" shape="round">打开</arco-button>
+                  <arco-dropdown trigger="hover">
+                    <MoreOutlined style="margin-left: 10px;"/>
                     <template #content>
-                        <a-doption @click="v3 = true">新建文件夹</a-doption>
+                      <arco-doption @click="o2(item['_id']['$oid'], item['title'])">重命名</arco-doption>
+                      <arco-doption @click="deleter2(item['_id']['$oid'], item['title'])" style="color: red">删除</arco-doption>
                     </template>
-                </a-dropdown-button>
-            <FeedBack/>
-            <a-spin :loading="loading" style="width: 90%">
-              <div>
-                    <div v-for="(item, index) in folder_list" class="content-card">
-                        <span style="margin-left: 10px;"><FolderOutlined style="margin-right: 10px;"/>{{item['title']}}</span>
-                        <a-tooltip content="最后编辑时间"><span style="margin-left: 10%;"><ClockCircleOutlined/>  {{ formatDate(item['update_time']) }}</span></a-tooltip>
-                        <a-tooltip content="内容ID"><span style="margin-left: 10%;"><IdcardOutlined/>  {{ item['_id']['$oid'] }}</span></a-tooltip>
-                        <div style="margin-left: 10px; display: inline-block">
-                            <a-button @click="router.push('/home_v2?path=' + item['title'])" type="primary" shape="round">打开</a-button>
-                            <a-dropdown trigger="hover">
-                                <MoreOutlined style="margin-left: 10px;"/>
-                                <template #content>
-                                    <a-doption @click="o2(item['_id']['$oid'], item['title'])">重命名</a-doption>
-                                    <a-doption @click="deleter2(item['_id']['$oid'], item['title'])" style="color: red">删除</a-doption>
-                                </template>
-                            </a-dropdown>
-                        </div>
-                    </div>
+                  </arco-dropdown>
                 </div>
-                <div>
-                    <div v-for="(item, index) in file_list" class="content-card">
-                        <span style="margin-left: 10px;">{{item['title']}}</span>
-                        <a-tooltip content="当前状态"><span style="margin-left: 10px;"><a-tag :color="item['current_status'] == 0 ? 'gray' : item['current_status'] == 1 ? '#7816ff' : item['current_status'] == 2 ? 'gold' : item['current_status'] == 3 ? 'cyan' : item['current_status'] == 4 ? 'green' : item['current_status'] == -1 ? 'orange' : item['current_status'] == -2 ? 'red' : 'purple'">{{ item['current_status'] == 0 ? '草稿' : item['current_status'] == 1 ? '待审核' : item['current_status'] == 2 ? '审核中' : item['current_status'] == 3 ? '撰稿中' : item['current_status'] == 4 ? '已发布' : item['current_status'] == -1 ? '审核驳回' : item['current_status'] == -2 ? '内容被封禁或不适宜上线' : '未知' }}</a-tag></span></a-tooltip>
-                        <a-tooltip content="最后编辑时间"><span style="margin-left: 10%;"><ClockCircleOutlined/>  {{ formatDate(item['update_time']) }}</span></a-tooltip>
-                        <a-tooltip content="内容ID"><span style="margin-left: 10%;"><IdcardOutlined/>  {{ item['_id']['$oid'] }}</span></a-tooltip>
-                        <div style="margin-left: 10px; display: inline-block">
-                            <a-button @click="router.push(`/editor_v2/${item['_id']['$oid']}`)" type="primary" shape="round">打开</a-button>
-                            <a-dropdown trigger="hover">
-                                <MoreOutlined style="margin-left: 10px;"/>
-                                <template #content>
-                                    <a-doption @click="open(index)">详细信息</a-doption>
-                                    <a-doption @click="o(item['_id']['$oid'], item['title'])">重命名</a-doption>
-                                    <a-tooltip content="敬请期待"><a-doption disabled>分享</a-doption></a-tooltip>
-                                    <a-doption @click="deleter(item['_id']['$oid'], item['title'])" style="color: red">删除</a-doption>
-                                </template>
-                            </a-dropdown>
-                        </div>
+              </div>
+            </div>
+          <div>
+              <div v-for="(item, index) in file_list" class="content-card">
+                  <span style="margin-left: 10px;"><arco-tooltip content="文章"><icon-edit style="margin-right: 10px;"/></arco-tooltip> {{item['title']}}</span>
+                  <arco-tooltip content="当前状态"><span style="margin-left: 10px;"><arco-tag :color="item['current_status'] == 0 ? 'gray' : item['current_status'] == 1 ? '#7816ff' : item['current_status'] == 2 ? 'gold' : item['current_status'] == 3 ? 'cyan' : item['current_status'] == 4 ? 'green' : item['current_status'] == -1 ? 'orange' : item['current_status'] == -2 ? 'red' : 'purple'">{{ item['current_status'] == 0 ? '草稿' : item['current_status'] == 1 ? '待审核' : item['current_status'] == 2 ? '审核中' : item['current_status'] == 3 ? '撰稿中' : item['current_status'] == 4 ? '已发布' : item['current_status'] == -1 ? '审核驳回' : item['current_status'] == -2 ? '内容被封禁或不适宜上线' : '未知' }}</arco-tag></span></arco-tooltip>
+                  <arco-tooltip content="最后编辑时间"><span style="margin-left: 10%;"><ClockCircleOutlined/>  {{ formatDate(item['update_time']) }}</span></arco-tooltip>
+                  <arco-tooltip content="内容ID"><span style="margin-left: 10%;"><IdcardOutlined/>  {{ item['_id']['$oid'] }}</span></arco-tooltip>
+                  <div style="margin-right: 10px; display: inline-block; float: right">
+                      <arco-button @click="router.push(`/editor_v2/${item['_id']['$oid']}`)" type="primary" shape="round">打开</arco-button>
+                      <arco-dropdown trigger="hover">
+                        <MoreOutlined style="margin-left: 10px;"/>
+                          <template #content>
+                            <arco-doption @click="open(index)">详细信息</arco-doption>
+                            <arco-doption @click="o(item['_id']['$oid'], item['title'])">重命名</arco-doption>
+                            <arco-tooltip content="测试中，不代表最终品质"><arco-doption @click="openShare(item['title'], item['_id']['$oid'])">分享</arco-doption></arco-tooltip>
+                            <arco-doption @click="deleter(item['_id']['$oid'], item['title'])" style="color: red">删除</arco-doption>
+                          </template>
+                        </arco-dropdown>
                     </div>
-                    <a-result style="margin-top: 5%" v-if="file_list.length === 0 && folder_list.length === 0" status="404" title="空  空  如  也" subtitle="不如创建点内容？">
-                    </a-result>
+                  </div>
+                  <arco-result style="margin-top: 10%" v-if="file_list.length === 0 && folder_list.length === 0" status="404" title="空  空  如  也" subtitle="不如创建点内容？"></arco-result>
                 </div>
-            </a-spin>
-        </a-layout-content>
-      </a-layout>
-    </a-layout>
+        </arco-spin>
+  </EditorLayout>
     <!-- 新建对话框 -->
-  <a-modal v-model:visible="v1" :on-before-ok="h1">
+  <arco-modal v-model:visible="v1" :on-before-ok="h1">
     <template #title>
       创建新内容
     </template>
-    <div>在创建之前请确保已阅读完所有的 <a-link target="_blank" href="https://seelevollerei.online/build/guide.html" type="primary">编辑规定和要求</a-link>
+    <div>在创建之前请确保已阅读完所有的 <arco-link target="_blank" href="https://seelevollerei.online/build/guide.html" type="primary">编辑规定和要求</arco-link>
+      <p style="color: red">分类创建后不支持更改，请谨慎选择</p>
     </div>
     <div style="margin-top: 20px;">
-      <a-input v-model="name" placeholder="新内容的名称" allow-clear>
+      <small>内容名称</small>
+      <arco-input v-model="name" placeholder="新内容的名称" allow-clear>
         <template #prefix>
           <icon-edit />
         </template>
-      </a-input>
+      </arco-input>
+      <small :style="{marginTop: '20px', display: 'block'}">内容分类</small>
+      <arco-select v-model:model-value="catagory" :style="{width:'100%',}" placeholder="选择分类">
+        <arco-option :value="1">词条（例如人、称呼、群体、标签等）</arco-option>
+        <arco-option :value="2">历史事件（例如节奏大战等）</arco-option>
+        <arco-option :value="3">梗（例如著名的“米哈游赛博撅龙脉”）</arco-option>
+        <arco-option disabled :value="4">忘却之庭（用途未知，暂不开放创建）</arco-option>
+    </arco-select>
     </div>
     <div style="margin-top: 20px;">
-      <a-checkbox v-model="t">我已阅读并同意《编辑规定》，《Crab Studio 最终用户许可协议》和《隐私政策》，并对创建的内容所负责。</a-checkbox>
+      <arco-checkbox v-model="t">我已阅读并同意《编辑规定》，《Crab Studio 最终用户许可协议》和《隐私政策》，并对创建的内容所负责。</arco-checkbox>
     </div>
-  </a-modal>
+  </arco-modal>
   <!-- 新建文件夹对话框 -->
-  <a-modal v-model:visible="v3" :on-before-ok="h3">
+  <arco-modal v-model:visible="v3" :on-before-ok="h3">
     <template #title>
       创建文件夹
     </template>
     <div style="margin-top: 20px;">
-      <a-input v-model="name3" placeholder="文件夹名称" allow-clear>
+      <arco-input v-model="name3" placeholder="文件夹名称" allow-clear>
         <template #prefix>
           <icon-edit />
         </template>
-      </a-input>
+      </arco-input>
     </div>
-  </a-modal>
+  </arco-modal>
   <!-- 重命名对话框 -->
-  <a-modal v-model:visible="v2" :on-before-ok="h2">
+  <arco-modal v-model:visible="v2" :on-before-ok="h2">
     <template #title>
       更新 {{ a }} 的标题 (ID: {{ b }})
     </template>
     <div style="margin-top: 20px;">
-      <a-input v-model="name2" placeholder="新内容的名称" allow-clear>
+      <arco-input v-model="name2" placeholder="新内容的名称" allow-clear>
         <template #prefix>
           <icon-edit />
         </template>
-      </a-input>
+      </arco-input>
     </div>
-  </a-modal>
+  </arco-modal>
     <!-- 重命名文件夹对话框 -->
-  <a-modal v-model:visible="v4" :on-before-ok="h4">
+  <arco-modal v-model:visible="v4" :on-before-ok="h4">
     <template #title>
       更新 {{ a2 }} 的标题 (ID: {{ b2 }})
     </template>
     <div style="margin-top: 20px;">
-      <a-input v-model="name4" placeholder="新内容的名称" allow-clear>
+      <arco-input v-model="name4" placeholder="新内容的名称" allow-clear>
         <template #prefix>
           <icon-edit />
         </template>
-      </a-input>
+      </arco-input>
     </div>
-  </a-modal>
+  </arco-modal>
   <!-- 详细信息 -->
-  <a-drawer @cancel="openornot = false" :footer="false" :visible="openornot" :width="340" unmountOnClose>
+  <arco-drawer @cancel="openornot = false" :footer="false" :visible="openornot" :width="340" unmountOnClose>
     <template #title>
       {{ drawer_text['title'] }}
     </template>
     <div v-for="i in drawer_text['content']">{{ i }}
     </div>
-  </a-drawer>
+  </arco-drawer>
+  <CreateShare :title="m3" :id="m4" :open="m5" @close="m5 = false"/>
 </template>
 
 <style>
@@ -162,15 +152,13 @@
 </style>
 
 <script lang="ts" setup>
-import MenuNext from '../components/menu_next.vue'
-import FeedBack from '../components/feedback.vue'
-import Carousel from '../components/carousel.vue'
 import Axios from 'axios'
 import { ref, onMounted, watch } from 'vue'
-import CUiDialog from '../components/dialog.vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import { PlusOutlined, ClockCircleOutlined, IdcardOutlined, MoreOutlined, FolderOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
+import EditorLayout from '../components/editor_layout.vue'
+import CreateShare from '../components/create_share.vue'
 
 const loading = ref(true)
 const file_list = ref([])
@@ -180,6 +168,16 @@ const router = useRouter()
 const openornot = ref(false)
 
 const drawer_text = ref({})
+
+// 分享
+const m3 = ref(null)
+const m4 = ref(null)
+const m5 = ref(false)
+const openShare = (title: string, id: string) => {
+  m3.value = title
+  m4.value = id
+  m5.value = true
+}
 
 const open = (index: number) => {
     openornot.value = true
@@ -268,6 +266,7 @@ load()
 const v1 = ref(false)
 const t = ref(false)
 const name = ref(null)
+const catagory = ref(0)
 const h1 = () => {
   if (name.value == null){
     Message.error('请填写内容名称')
@@ -281,7 +280,7 @@ const h1 = () => {
     Axios({
       url: '/api/v2/content/create',
       method: 'POST',
-      data: { title: name.value, parent: router.currentRoute.value.query['path'] }
+      data: { title: name.value, parent: router.currentRoute.value.query['path'], catagory: catagory.value }
     })
     .then(function(r){
       if (r['data']['code'] != 0){
@@ -457,4 +456,4 @@ const deleter2 = (id: string, title: string) => {
     }
   })
 }
-</script>
+</script>>
