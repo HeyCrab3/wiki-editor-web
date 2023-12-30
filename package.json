@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fix-error-134": "cross-env LIMIT=12288 increase-memory-limit"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
@@ -17,6 +18,7 @@
     "ant-design-vue": "^4.0.7",
     "axios": "^1.4.0",
     "firebase": "^10.3.1",
+    "increase-memory-limit": "^1.0.7",
     "js-cookie": "^3.0.5",
     "less": "^4.2.0",
     "monaco-editor": "^0.40.0",

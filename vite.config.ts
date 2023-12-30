@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, splitVendorChunkPlugin  } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { execSync } from 'child_process';
 import { vitePluginForArco } from '@arco-plugins/vite-vue'
@@ -26,7 +26,7 @@ export default defineConfig({
   define: {
     _APP_INFO_: JSON.stringify(_APP_INFO_)
   },
-  plugins: [vue(), vitePluginForArco({
+  plugins: [vue(), splitVendorChunkPlugin(), vitePluginForArco({
     componentPrefix: "arco"
   }),AutoImport({
     resolvers: [ArcoResolver()],
@@ -69,5 +69,8 @@ export default defineConfig({
           javascriptEnabled: true,
       }
     },
-},
+  },
+  build: {
+    sourcemap: true
+  }
 })
