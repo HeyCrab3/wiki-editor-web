@@ -17,7 +17,7 @@
                     <arco-tooltip content="展开菜单" v-else><icon-menu-unfold @click="collapsed = false" style="cursor: pointer"/></arco-tooltip>
                     <arco-dropdown trigger="hover">
                         <div style="float: right">
-                            <arco-avatar :size="24" :style="{ backgroundColor: '#3370ff' }"><IconUser /></arco-avatar>
+                            <arco-avatar :image-url="user.user_data.d.avatar" :size="24"/>
                             <span style="margin: 0px 10px">{{ user.user_data.nickName }}</span>
                             <IconDown/>
                         </div>

@@ -1,7 +1,16 @@
 <template>
     <EditorLayout>
         <h2 style="margin-left: 10px;">用户中心</h2>
-        <arco-avatar :style="{ backgroundColor: '#00d0b6' }" :size="40" style="margin-left: 10px;">{{user.user_data['nickName']}}</arco-avatar>
+        <arco-avatar shape="circle" @click="showUpload = true" :size="40" style="margin-left: 10px;">
+            <img
+                alt="avatar"
+                :src="user.user_data.d.avatar"
+                style="border-radius: 10000px"
+            />
+            <template #trigger-icon>
+                <IconCamera />
+            </template>
+        </arco-avatar>
         <arco-typography-title style="display: inline; margin-left: 15px;" :heading="4">{{user.user_data['nickName']}}</arco-typography-title>
         <div style="margin-top: 25px; margin-left: 10px;">
             <arco-statistic title="创建的内容数" :value="edit_count" animation show-group-separator />
@@ -22,6 +31,7 @@
             </arco-collapse>
         </div>
     </EditorLayout>
+    <UploadImage :show="showUpload" @close="showUpload = false"/>
 </template>
 
 <style>
@@ -34,12 +44,16 @@ import { ref } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import Axios from 'axios'
 import { useUserStore } from '../store/user'
+import UploadImage from '../components/user/upload_image.vue'
 
 const loading = ref(true)
 const edit_count = ref(0)
 const msg_count = ref(0)
 const msg = ref({})
 const user = useUserStore();
+const showUpload = ref(false)
+const changePd = ref(false)
+const changeNk = ref(false)
 
 document.title = '用户中心 | 仙舟通鉴编辑器'
 

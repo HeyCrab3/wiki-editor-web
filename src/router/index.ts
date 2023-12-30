@@ -31,6 +31,9 @@ import LoginV3View from '../pages/login/login_v3.vue'
 import RegisterV3View from '../pages/login/register_v3.vue'
 import UniLoginPortal from '../pages/login/unilogin_portal.vue'
 
+// 用户中心
+import UserCenter from '../pages/uc/uc.vue'
+
 const routes = [
     {
         path: '/',
@@ -143,6 +146,11 @@ const routes = [
         path: '/share/:id',
         name: 'share',
         component: Share1View
+    },
+    {
+        path: '/u/:id',
+        name: '用户中心',
+        component: UserCenter
     }
 ]
   

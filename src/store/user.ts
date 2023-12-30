@@ -12,6 +12,7 @@ export const useUserStore = defineStore('user_info', () => {
         'nickName': undefined,
         'phone': undefined,
         'perm': undefined,
+        'd': undefined,
         'loggedIn': false
     })
 

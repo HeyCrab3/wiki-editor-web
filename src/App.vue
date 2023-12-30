@@ -7,8 +7,12 @@
 <script setup>
 import { ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router';
+import {useUserStore} from './store/user'
 const router = useRoute();
 const isShow = ref(true)
+const user = useUserStore()
+
+user.fetchUserData()
 // watchEffect(() => {
 //   if (router.path == '/' || router.path == '/app' || router.path == '/login' || router.path == '/register'){
 //     document.body.removeAttribute('arco-theme')

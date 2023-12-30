@@ -5,6 +5,8 @@ import App from './App.vue';
 import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import router from './router';
 import VMdEditor from '@kangc/v-md-editor/lib/codemirror-editor';
+import VMdPreview from '@kangc/v-md-editor/lib/preview';
+import '@kangc/v-md-editor/lib/style/preview.css';
 import '@kangc/v-md-editor/lib/style/codemirror-editor.css';
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js';
 import '@kangc/v-md-editor/lib/theme/style/vuepress.css';
@@ -64,12 +66,12 @@ const perf = getPerformance(firebaseApp)
 
 const app = createApp(App);
 
-const whileList = ['/', '/app', '/share', '/editor_v3', '/login_v3', '/register_v3', '/forget_password', '/login', '/register', '/uniLogin']
+const whileList = ['/', '/app', '/share', '/editor_v3', '/login_v3', '/register_v3', '/forget_password', '/login', '/register', '/uniLogin', '/u', '/404']
  
 router.beforeEach((to, from, next) => {
     let token = Cookies.get('session')
     //白名单 有值 或者登陆过存储了token信息可以跳转 否则就去登录页面
-    if (whileList.includes(to.path) || token) {
+    if (whileList.includes(to.path) || token || to.path.includes('/u')) {
         next()
     } else {
         message.error('请先登录')
@@ -111,11 +113,16 @@ VMdEditor.use(vuepressTheme, {
   Hljs: hljs,
 });
 
+VMdPreview.use(vuepressTheme, {
+  Hljs: hljs,
+});
+
 app.use(Antd)
 app.use(router);
 app.use(ArcoVueIcon);
 app.use(VMdEditor);
 app.use(createPinia(useUserStore))
+app.use(VMdPreview)
 
 window.removeLoadingPage()
 

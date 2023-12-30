@@ -1,5 +1,5 @@
 <template>
-    <arco-layout-footer style="height: 100px; padding: 15px; background: #f5f5f5">
+    <arco-layout-footer style="height: 100px; padding: 15px; background: #f5f5f5;">
             <div style="float: left; position: relative; bottom: 6px">
                 <h2>仙舟通鉴  <arco-tooltip content="本站已支持 IPv6 网络访问"><a href="https://ipw.cn/ipv6webcheck/?site=editor.seelevollerei.online" target='_blank'><img style='display:inline-block;vertical-align:middle' src="https://static.ipw.cn/icon/ipv6-s1.svg"></a></arco-tooltip></h2>
                 <small>©{{ new Date().getFullYear() }} Crab Studio. All Rights Reserved.</small><br/>
@@ -24,3 +24,7 @@
             </div>
         </arco-layout-footer>
 </template>
+
+<script lang="ts" setup>
+import { RightOutlined } from '@ant-design/icons-vue'
+</script>
